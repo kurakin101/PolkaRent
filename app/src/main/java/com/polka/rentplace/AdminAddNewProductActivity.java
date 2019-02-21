@@ -95,29 +95,29 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         AddNewProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ValidateProductData();
+                ValidateProductData();
 
-                if (mBitmap != null) {
-                    FirebaseVisionLabelDetectorOptions options = new FirebaseVisionLabelDetectorOptions.Builder()
-                            .setConfidenceThreshold(0.7f)
-                            .build();
-                    FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mBitmap);
-                    FirebaseVisionLabelDetector detector = FirebaseVision.getInstance().getVisionLabelDetector(options);
-                    detector.detectInImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionLabel>>() {
-                        @Override
-                        public void onSuccess(List<FirebaseVisionLabel> labels) {
-                            for (FirebaseVisionLabel label : labels) {
-                                InputProductDescriotion.append(label.getLabel() + "\n");
-                                InputProductDescriotion.append(label.getConfidence() + "\n\n");
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            InputProductDescriotion.setText(e.getMessage());
-                        }
-                    });
-                }
+//                if (mBitmap != null) {
+//                    FirebaseVisionLabelDetectorOptions options = new FirebaseVisionLabelDetectorOptions.Builder()
+//                            .setConfidenceThreshold(0.7f)
+//                            .build();
+//                    FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mBitmap);
+//                    FirebaseVisionLabelDetector detector = FirebaseVision.getInstance().getVisionLabelDetector(options);
+//                    detector.detectInImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionLabel>>() {
+//                        @Override
+//                        public void onSuccess(List<FirebaseVisionLabel> labels) {
+//                            for (FirebaseVisionLabel label : labels) {
+//                                InputProductDescriotion.append(label.getLabel() + "\n");
+//                                InputProductDescriotion.append(label.getConfidence() + "\n\n");
+//                            }
+//                        }
+//                    }).addOnFailureListener(new OnFailureListener() {
+//                        @Override
+//                        public void onFailure(@NonNull Exception e) {
+//                            InputProductDescriotion.setText(e.getMessage());
+//                        }
+//                    });
+//                }
 
 
             }
@@ -168,6 +168,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == GalleryPick && resultCode == RESULT_OK && data != null){
+
 //            ImageUri = data.getData();
 //            InputProductImage.setImageURI(ImageUri);
 
@@ -186,6 +187,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                     if (mBitmap != null) {
                         InputProductDescriotion.setText(null);
                         InputProductImage.setImageBitmap(mBitmap);
+
                     }
 
             }
