@@ -107,7 +107,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
         cartMap.put("quantity", numberButton.getNumber());
-        cartMap.put("p2", p2);
+        cartMap.put("name", p2);
         cartMap.put("discount", "");
 
         cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone())
@@ -127,6 +127,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                                 Toast.makeText(ProductDetailsActivity.this, "Added to cart list", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
                                                 startActivity(intent);
+
                                             }
                                         }
                                     });
@@ -148,7 +149,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productName.setText(products.getPname());
                     productPrice.setText(products.getPrice());
                     productDescription.setText(products.getDescription());
-                    p2 = products.getP2();
+                    p2 = products.getPhone();
                     Picasso.get().load(products.getImage()).into(productImage);
 
                 }
@@ -175,7 +176,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     else if (shippingText.equals("not shipped")){
                         state = "Order Placed";
                     }
-
                 }
             }
 

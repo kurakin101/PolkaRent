@@ -43,6 +43,15 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+
+
+
+
+
+
+
+
         FirebaseRecyclerOptions<AdminOrders> options = new
                 FirebaseRecyclerOptions.Builder<AdminOrders>()
                 .setQuery(ordersRef, AdminOrders.class)

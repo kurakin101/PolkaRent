@@ -3,15 +3,16 @@ package com.polka.rentplace.model;
 import android.content.res.Resources;
 
 public class Cart {
-    private String pid, pname, price, quantiny, duscount,image;
+    private String pid, pname, price, quantiny, duscount,image, phone;
 
     public Cart() {
     }
 
 
 
-    public Cart(String pid, String pname, String price, String quantiny, String duscount, String image) {
+    public Cart(String pid, String phone, String pname, String price, String quantiny, String duscount, String image) {
         this.pid = pid;
+        this.phone = phone;
         this.pname = pname;
         this.price = price;
         this.quantiny = quantiny;
@@ -28,6 +29,14 @@ public class Cart {
 
     public void setPid(String pid) {
         this.pid = pid;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getPname() {

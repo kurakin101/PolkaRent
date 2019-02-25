@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.polka.rentplace.model.Cart;
+import com.polka.rentplace.model.Products;
 import com.polka.rentplace.prevalent.Prevalent;
 import com.polka.rentplace.viewHolder.CartViewHolder;
 import com.squareup.picasso.Picasso;
@@ -36,6 +37,7 @@ public class CartActivity extends AppCompatActivity {
 
     private Button NextProcessBtn;
     private TextView txtTotalAmount,txtMsg1;
+
 
     private int overTotalPrice = 0;
 
@@ -85,6 +87,7 @@ public class CartActivity extends AppCompatActivity {
                         .child("Products"), Cart.class)
                         .build();
 
+
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
                 = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
@@ -133,7 +136,6 @@ public class CartActivity extends AppCompatActivity {
                                                         intent.putExtra("pid", model.getPid());
                                                         startActivity(intent);
 
-//
                                                     }
                                                }
                                           });
