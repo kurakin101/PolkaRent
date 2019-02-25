@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_overlay"
     tools:context=".AdminAddNewProductActivity">
 
     <ImageView
@@ -12,58 +13,132 @@
         android:layout_height="200dp"
         android:cropToPadding="false"
         android:scaleType="centerCrop"
-        android:background="@drawable/ic_collections"
+        android:background="@drawable/corners"
+        android:padding="5dp"
+        android:src="@drawable/ic_collections"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"/>
 
 
-    <EditText
-        android:id="@+id/product_name"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/product_name_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="40dp"
         android:layout_below="@id/select_product_image"
-        android:inputType="textMultiLine"
-        android:layout_marginTop="20dp"
-        android:padding="20dp"
-        android:hint="Product Name"
-        android:layout_marginHorizontal="50dp"
-        />
+        app:boxStrokeWidth="4dp"
+        android:textColorHint="@color/colorPrimary"
+        app:boxStrokeColor="@color/colorPrimary"
+        android:outlineSpotShadowColor="@color/colorPrimary"
+        android:outlineAmbientShadowColor="@color/colorPrimary"
+       >
 
-    <EditText
-        android:id="@+id/product_description"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/product_name_ed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Product Name"
+            android:textStyle="bold"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimary" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/product_category_in"
+        android:layout_below="@+id/product_name_in"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_name"
-        android:inputType="textMultiLine"
-        android:layout_marginTop="6dp"
-        android:padding="20dp"
-        android:hint="Product Category"
-        android:layout_marginHorizontal="50dp"
-        />
+        app:boxStrokeWidth="4dp"
+        android:textColorHint="@color/colorPrimary"
+        app:boxStrokeColor="@color/colorPrimary"
+        android:outlineSpotShadowColor="@color/colorPrimary"
+        android:outlineAmbientShadowColor="@color/colorPrimary"
+        >
 
-    <EditText
-        android:id="@+id/product_price"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/product_category_ed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            android:hint="Product Category"
+            android:textStyle="bold" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/product_subcategory_in"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_below="@+id/product_category_in"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/product_description"
-        android:inputType="textMultiLine"
-        android:layout_marginTop="6dp"
-        android:padding="20dp"
-        android:hint="Product Price"
-        android:layout_marginHorizontal="50dp"
-        />
+        app:boxStrokeWidth="4dp"
+        android:textColorHint="@color/colorPrimary"
+        app:boxStrokeColor="@color/colorPrimary"
+        android:outlineSpotShadowColor="@color/colorPrimary"
+        android:outlineAmbientShadowColor="@color/colorPrimary">
 
-    <Button
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/product_subcategory_ed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            android:hint="Product SubCategory"
+            android:textStyle="bold" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/product_price_in"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="25dp"
+        android:layout_below="@+id/product_subcategory_in"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidth="4dp"
+        android:textColorHint="@color/colorPrimary"
+        app:boxStrokeColor="@color/colorPrimary"
+        android:outlineSpotShadowColor="@color/colorPrimary"
+        android:outlineAmbientShadowColor="@color/colorPrimary">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/product_price_ed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textColor="@color/colorPrimary"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            android:hint="Product Price"
+            android:textStyle="bold" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.button.MaterialButton
         android:id="@+id/add_new_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/product_price"
-        android:text="Add product"
+        android:layout_below="@+id/product_price_in"
         android:layout_marginHorizontal="45dp"
-        android:padding="17dp"
         android:layout_marginTop="20dp"
-        android:textSize="18sp"
+        android:background="@color/colorPrimary"
+        android:elevation="8dp"
+        android:gravity="center"
+        android:padding="17dp"
+        android:text="Add Product"
         android:textAllCaps="false"
-        android:textColor="@color/black_overlay"/>
+        android:textColor="@color/black_overlay"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:cornerRadius="30dp" />
 
 </RelativeLayout>

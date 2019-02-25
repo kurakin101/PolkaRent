@@ -86,7 +86,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
         orderMap.put("totalAmount", totalAmount);
         orderMap.put("name", nameEditText.getText().toString());
-        orderMap.put("phone", phoneEditText.getText().toString());
+        orderMap.put("phoneOrder", phoneEditText.getText().toString());
         orderMap.put("address", addressEditText.getText().toString());
         orderMap.put("city", cityEditText.getText().toString());
         orderMap.put("date", saveCurrentDate);

@@ -5,14 +5,20 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.button.MaterialButton;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,41 +30,46 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.label.FirebaseVisionLabel;
 import com.google.firebase.ml.vision.label.FirebaseVisionLabelDetector;
-import com.google.firebase.ml.vision.label.FirebaseVisionLabelDetectorOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.polka.rentplace.model.Users;
+import com.polka.rentplace.prevalent.Prevalent;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import io.paperdb.Paper;
+
 public class AdminAddNewProductActivity extends AppCompatActivity {
 
     private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime;
-    private Button AddNewProductButton;
+    private MaterialButton AddNewProductButton;
     private ImageView InputProductImage;
-    private EditText InputProductName, InputProductDescriotion, InputProductPrice;
+    private TextInputEditText InputProductName, InputProductCategory, InputProductSubCategory, InputProductPrice;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl;
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
-    private Bitmap mBitmap;
     private ProgressDialog loadingBar;
-    public static final int RC_STORAGE_PERMS1 = 101;
-    public static final int RC_SELECT_PICTURE = 103;
-    public static final String ACTION_BAR_TITLE = "action_bar_title";
-    public File imageFile;
+
+    private FirebaseVisionLabelDetector mDetector;
+    private static final String TAG = AdminAddNewProductActivity.class.getName();
 
 
 
@@ -72,22 +83,25 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
 
 
-        AddNewProductButton = (Button) findViewById(R.id.add_new_product);
+        AddNewProductButton = (MaterialButton) findViewById(R.id.add_new_product);
         InputProductImage = (ImageView) findViewById(R.id.select_product_image);
-        InputProductName = (EditText) findViewById(R.id.product_name);
-        InputProductDescriotion = (EditText) findViewById(R.id.product_description);
-        InputProductPrice = (EditText) findViewById(R.id.product_price);
+        InputProductName =  findViewById(R.id.product_name_ed);
+        InputProductCategory =  findViewById(R.id.product_category_ed);
+        InputProductSubCategory =  findViewById(R.id.product_subcategory_ed);
+        InputProductPrice = findViewById(R.id.product_price_ed);
         loadingBar = new ProgressDialog(this);
 
+
+
+        Intent intent = getIntent();
+        String category = intent.getStringExtra("category");
+        InputProductCategory.setText(category);
 
 
         InputProductImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                OpenGallery();
-
-                checkStoragePermission(RC_STORAGE_PERMS1);
-
+                OpenGallery();
             }
         });
 
@@ -97,64 +111,12 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ValidateProductData();
 
-//                if (mBitmap != null) {
-//                    FirebaseVisionLabelDetectorOptions options = new FirebaseVisionLabelDetectorOptions.Builder()
-//                            .setConfidenceThreshold(0.7f)
-//                            .build();
-//                    FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mBitmap);
-//                    FirebaseVisionLabelDetector detector = FirebaseVision.getInstance().getVisionLabelDetector(options);
-//                    detector.detectInImage(image).addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionLabel>>() {
-//                        @Override
-//                        public void onSuccess(List<FirebaseVisionLabel> labels) {
-//                            for (FirebaseVisionLabel label : labels) {
-//                                InputProductDescriotion.append(label.getLabel() + "\n");
-//                                InputProductDescriotion.append(label.getConfidence() + "\n\n");
-//                            }
-//                        }
-//                    }).addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            InputProductDescriotion.setText(e.getMessage());
-//                        }
-//                    });
-//                }
-
-
             }
         });
 
     }
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case RC_STORAGE_PERMS1:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    OpenGallery();
-                } else {
-                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                }
-                break;
-
-        }
-    }
-
-
-    public void checkStoragePermission(int requestCode) {
-        switch (requestCode) {
-            case RC_STORAGE_PERMS1:
-                int hasWriteExternalStoragePermission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                if (hasWriteExternalStoragePermission == PackageManager.PERMISSION_GRANTED) {
-                    OpenGallery();
-                } else {
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
-                }
-                break;
-
-        }
-    }
 
     private void OpenGallery() {
         Intent galleryIntent = new Intent();
@@ -168,35 +130,31 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == GalleryPick && resultCode == RESULT_OK && data != null){
-
-//            ImageUri = data.getData();
-//            InputProductImage.setImageURI(ImageUri);
-
-            switch (requestCode) {
-                case RC_STORAGE_PERMS1:
-                    checkStoragePermission(requestCode);
-                    break;
-                case RC_SELECT_PICTURE:
-                    Uri dataUri = data.getData();
-                    String path = MyHelper.getPath(this, dataUri);
-                    if (path == null) {
-                        mBitmap = MyHelper.resizeImage(imageFile, this, dataUri, InputProductImage);
-                    } else {
-                        mBitmap = MyHelper.resizeImage(imageFile, path, InputProductImage);
-                    }
-                    if (mBitmap != null) {
-                        InputProductDescriotion.setText(null);
-                        InputProductImage.setImageBitmap(mBitmap);
-
-                    }
-
+            ImageUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), ImageUri);
+                InputProductImage.setImageBitmap(bitmap);
+                processImage();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        }
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mDetector != null) {
+            try {
+                mDetector.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Exception thrown while trying to close Image Labeling Detector: " + e);
+            }
         }
     }
 
     private void ValidateProductData(){
-        Description = InputProductDescriotion.getText().toString();
+        Description = InputProductSubCategory.getText().toString();
         Price = InputProductPrice.getText().toString();
         Pname = InputProductName.getText().toString();
 
@@ -233,7 +191,6 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
 
 
-
         productRandomKey = UUID.randomUUID().toString();
 
 
@@ -259,9 +216,9 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
 
-                     if (!task.isSuccessful()){
-                         throw  task.getException();
-                     }
+                        if (!task.isSuccessful()){
+                            throw  task.getException();
+                        }
                         downloadImageUrl = filePath.getDownloadUrl().toString();
                         return filePath.getDownloadUrl();
                     }
@@ -269,13 +226,24 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
 
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
                             downloadImageUrl = task.getResult().toString();
 
                             Toast.makeText(AdminAddNewProductActivity.this, "Products image save to Database Successfully..", Toast.LENGTH_SHORT).show();
 
-                            SaveProductIntoToDatabase();
+                            String phone = Paper.book().read(Prevalent.UserPhoneKey);
+                            String password = Paper.book().read(Prevalent.UserPasswordKey);
+
+                            if (phone != "" && password != "") {
+
+                                if (!TextUtils.isEmpty(phone) && !TextUtils.isEmpty(password)) {
+
+                                    SaveProductIntoToDatabase(phone, password);
+                                }
+
+
+                            }
                         }
                     }
                 });
@@ -286,38 +254,122 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
     }
 
-    private void SaveProductIntoToDatabase() {
-        HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
-        productMap.put("date", saveCurrentDate);
-        productMap.put("time", saveCurrentTime);
-        productMap.put("description", Description);
-        productMap.put("image", downloadImageUrl);
-        productMap.put("category", CategoryName);
-        productMap.put("price", Price);
-        productMap.put("pname", Pname);
-
-        ProductsRef.child(productRandomKey).updateChildren(productMap)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-
-                            Intent intent = new Intent(AdminAddNewProductActivity.this, AdminCategoryActivity.class);
-                            startActivity(intent);
 
 
-                            loadingBar.dismiss();
-                            Toast.makeText(AdminAddNewProductActivity.this, "Products is added successfully.. ", Toast.LENGTH_SHORT).show();
 
-                        }else{
-                            loadingBar.dismiss();
-                            String message = task.getException().toString();
-                            Toast.makeText(AdminAddNewProductActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
 
-                        }
-                    }
-                });
 
+
+
+    private void SaveProductIntoToDatabase(final String phone, final String password) {
+
+
+        final DatabaseReference RootRef;
+        RootRef = FirebaseDatabase.getInstance().getReference();
+
+
+
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                String users = "Users";
+                if (dataSnapshot.child(users).child(phone).exists())
+                {
+                    Users usersData = dataSnapshot.child(users).child(phone).getValue(Users.class);
+
+//                    if (usersData.getPhone().equals(phone))
+//                    {
+//                        if (usersData.getPassword().equals(password))
+//                        {
+//                           if (users.equals("Users"))
+//                            {
+                                HashMap<String, Object> productMap = new HashMap<>();
+                                productMap.put("pid", productRandomKey);
+                                productMap.put("date", saveCurrentDate);
+                                productMap.put("time", saveCurrentTime);
+                                productMap.put("description", Description);
+                                productMap.put("image", downloadImageUrl);
+                                productMap.put("category", CategoryName);
+                                productMap.put("price", Price);
+                                productMap.put("pname", Pname);
+                                productMap.put("phone", phone);
+                                productMap.put("password", password);
+
+                                ProductsRef.child(productRandomKey).updateChildren(productMap)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()){
+
+                                                    Intent intent = new Intent(AdminAddNewProductActivity.this, AdminCategoryActivity.class);
+                                                    startActivity(intent);
+
+
+                                                    loadingBar.dismiss();
+                                                    Toast.makeText(AdminAddNewProductActivity.this, "Products is added successfully.. ", Toast.LENGTH_SHORT).show();
+
+                                                }else{
+                                                    loadingBar.dismiss();
+                                                    String message = task.getException().toString();
+                                                    Toast.makeText(AdminAddNewProductActivity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+
+                                                }
+                                            }
+                                        });
+//                            }
+//                        }
+//                        else
+//                        {
+//                            loadingBar.dismiss();
+//                            Toast.makeText(AdminAddNewProductActivity.this, "Password is incorrect.", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+                }
+                else
+                {
+                    Toast.makeText(AdminAddNewProductActivity.this, "Account with this " + phone + " number do not exists.", Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+            }
+
+    private void processImage() {
+        if (InputProductImage.getDrawable() == null) {
+            // ImageView has no image
+        } else {
+            // ImageView contains image
+            Bitmap bitmap = ((BitmapDrawable) InputProductImage.getDrawable()).getBitmap();
+            FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
+            mDetector = FirebaseVision.getInstance().getVisionLabelDetector();
+            mDetector.detectInImage(image)
+                    .addOnSuccessListener(
+                            new OnSuccessListener<List<FirebaseVisionLabel>>() {
+                                @Override
+                                public void onSuccess(List<FirebaseVisionLabel> labels) {
+                                    // Task completed successfully
+                                    Object element0 = labels.get(0);
+                                    InputProductSubCategory.setText(((FirebaseVisionLabel) element0).getLabel());
+                                }
+                            })
+                    .addOnFailureListener(
+                            new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    // Task failed with an exception
+                                    Log.e(TAG, "Image labelling failed " + e);
+                                }
+                            });
+        }
     }
 }

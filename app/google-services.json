@@ -8,6 +8,37 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1084613345905:android:fa88c77749e0e6fa",
+        "android_client_info": {
+          "package_name": "be.maximedupierreux.vault.vault.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084613345905-h4hm61iil4aq8ghh6a9ngq3tvlhpdopi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB58voeUivyqNIcAjG2hslnZFQNibIKWi0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1084613345905:android:eaf139da07384b7f",
         "android_client_info": {
           "package_name": "com.arexperiments.justaline"
@@ -135,6 +166,68 @@
         "mobilesdk_app_id": "1:1084613345905:android:789fd7a5fbc3d07b",
         "android_client_info": {
           "package_name": "com.j2d.nudle.gramophone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084613345905-h4hm61iil4aq8ghh6a9ngq3tvlhpdopi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB58voeUivyqNIcAjG2hslnZFQNibIKWi0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084613345905:android:f49fd4b56a76f89a",
+        "android_client_info": {
+          "package_name": "com.jessicathornsby.mlkitimagelabelling"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084613345905-h4hm61iil4aq8ghh6a9ngq3tvlhpdopi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB58voeUivyqNIcAjG2hslnZFQNibIKWi0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084613345905:android:85f38c498202a5c7",
+        "android_client_info": {
+          "package_name": "com.nudle.rentplace"
         }
       },
       "oauth_client": [

@@ -1,7 +1,11 @@
 package com.polka.rentplace;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.design.button.MaterialButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 import com.polka.rentplace.model.Cart;
 import com.polka.rentplace.model.Products;
 import com.polka.rentplace.prevalent.Prevalent;
@@ -26,16 +34,17 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.UUID;
 
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
-    private Button addToCartButton;
+    private MaterialButton addToCartButton;
     private ImageView productImage;
     private ElegantNumberButton numberButton;
+    private Uri filePath;
     private TextView productPrice, productDescription, productName;
-    private String productID = "", state = "Nonormal";
-    Cart cart = new Cart();
+    private String productID = "", state = "Nonormal", p2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +54,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productID = getIntent().getStringExtra("pid");
 
 
-        addToCartButton = (Button) findViewById(R.id.pd_add_to_cart_button);
+        addToCartButton = (MaterialButton) findViewById(R.id.pd_add_to_cart_button);
         numberButton = (ElegantNumberButton) findViewById(R.id.number_btn);
         productImage = (ImageView) findViewById(R.id.product_image_details);
         productPrice = (TextView) findViewById(R.id.product_price_details);
@@ -98,7 +107,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
         cartMap.put("quantity", numberButton.getNumber());
-        cartMap.put("image", productImage.getResources());
+        cartMap.put("p2", p2);
         cartMap.put("discount", "");
 
         cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone())
@@ -139,8 +148,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     productName.setText(products.getPname());
                     productPrice.setText(products.getPrice());
                     productDescription.setText(products.getDescription());
+                    p2 = products.getP2();
                     Picasso.get().load(products.getImage()).into(productImage);
-                    cart.setImage(String.valueOf(productImage.getResources()));
 
                 }
             }

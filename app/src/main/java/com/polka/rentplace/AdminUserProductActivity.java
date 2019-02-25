@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.polka.rentplace.model.Cart;
 import com.polka.rentplace.viewHolder.CartViewHolder;
+import com.squareup.picasso.Picasso;
 
 public class AdminUserProductActivity extends AppCompatActivity {
 
@@ -58,6 +59,8 @@ public class AdminUserProductActivity extends AppCompatActivity {
                 holder.txtProductQuantiny.setText("Quantity = " + model.getQuantiny());
                 holder.txtProductPrice.setText("Price = " + model.getPrice());
                 holder.txtProductName.setText("Product = " + model.getPname());
+//                Picasso.get().load(model.getImage()).into(holder.imgProductImg);
+
             }
 
             @NonNull

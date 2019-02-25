@@ -9,6 +9,7 @@
     <android.support.design.card.MaterialCardView
         android:padding="10dp"
         android:layout_margin="10dp"
+        android:elevation="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="16dp">
@@ -16,14 +17,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark">
+            android:background="@color/colorPrimaryDark"
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/order_user_name"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:text="UserName"
+                android:textColor="@color/black_overlay"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -32,7 +34,7 @@
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginLeft="5dp"
+                android:textColor="@color/black_overlay"
                 android:text="Phone Number"
                 android:textAlignment="viewEnd"
                 android:textStyle="bold"
@@ -42,9 +44,10 @@
                 android:id="@+id/order_total_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/cart_product_quantiny"
-                android:layout_marginTop="25dp"
+                android:layout_below="@id/order_user_name"
+                android:layout_marginTop="12dp"
                 android:gravity="center"
+                android:textColor="@color/black_overlay"
                 android:text="Total Price"
                 android:textStyle="bold" />
 
@@ -53,7 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/order_total_price"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/black_overlay"
                 android:gravity="center"
                 android:text="Address, City"
                 android:textStyle="bold" />
@@ -63,15 +67,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/order_address_city"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/black_overlay"
                 android:gravity="center"
                 android:text="Date Time"
                 android:textStyle="bold" />
 
-            <Button
+            <android.support.design.button.MaterialButton
                 android:id="@+id/show_all_products_btn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_below="@id/order_date_time"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginStart="20dp"
@@ -80,9 +85,13 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
+                android:backgroundTint="@color/black_overlay"
+                android:textColor="@color/colorPrimaryDark"
+                android:gravity="center"
                 android:text="Show This Order Products"
-                android:textAllCaps="true"
-                android:textStyle="bold" />
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:cornerRadius="30dp" />
 
         </RelativeLayout>
 

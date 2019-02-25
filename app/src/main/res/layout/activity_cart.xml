@@ -5,25 +5,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_overlay"
     tools:context=".CartActivity">
 
     <RelativeLayout
         android:id="@+id/rl11"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorPrimaryDark"
         android:layout_alignParentTop="true">
-        
-        
+
+
         <TextView
             android:id="@+id/total_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Price = "
-            android:textColor="@color/black_overlay"
-            android:textAlignment="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="10dp"
-            />
+            android:layout_marginBottom="21dp"
+            android:text="Total Price = "
+            android:textAlignment="center"
+            android:textColor="@color/black_overlay"
+            android:textSize="18sp"
+            android:textStyle="bold" />
         
         
     </RelativeLayout>
@@ -47,14 +52,22 @@
         android:layout_below="@+id/rl11">
     </android.support.v7.widget.RecyclerView>
 
-    <Button
+    <android.support.design.button.MaterialButton
         android:id="@+id/next_process_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:background="@color/colorPrimaryDark"
+        android:elevation="8dp"
+        android:gravity="center"
         android:text="Next"
-        android:layout_margin="20dp"/>
+        android:textColor="@color/black_overlay"
+        android:textStyle="bold"
+        app:cornerRadius="30dp" />
 
 
 </RelativeLayout>

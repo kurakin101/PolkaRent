@@ -60,7 +60,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                txtTotalAmount.setText("Total price =  " +  "4");
+//                txtTotalAmount.setText("Total price =  " +  "4");
 
                 Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
                 intent.putExtra("Total Price", String.valueOf(overTotalPrice));

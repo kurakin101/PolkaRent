@@ -4,135 +4,166 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black_overlay"
     tools:context=".AdminCategoryActivity">
 
-    <TextView
-        android:id="@+id/slogan_category"
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:text="Add new product"
-        android:textAlignment="center"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        />
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-    <LinearLayout
-        android:id="@+id/linear1_category_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:layout_below="@id/slogan_category">
+        <TextView
+            android:id="@+id/slogan_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Add new product"
+            android:textAlignment="center"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            />
 
-        <ImageView
-            android:id="@+id/t_shirts"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/tshirts"/>
-        <ImageView
-            android:id="@+id/childs"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/childs"/>
-        <ImageView
-            android:id="@+id/technical"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/tech"/>
-        <ImageView
-            android:id="@+id/smartphone"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/smartphone"/>
+     <RelativeLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_centerHorizontal="true"
+         android:elevation="8dp"
+         android:layout_below="@+id/slogan_category"
+         android:layout_marginTop="24dp"
+         android:layout_marginBottom="100dp"
+         android:padding="8dp"
+         android:background="@drawable/corners">
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linear2_category_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:layout_below="@id/linear1_category_layout">
+         <LinearLayout
+             android:id="@+id/linear1_category_layout"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_centerHorizontal="true"
+             android:gravity="center">
 
-        <ImageView
-            android:id="@+id/car"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/car"/>
-        <ImageView
-            android:id="@+id/bike"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/bike"/>
-        <ImageView
-            android:id="@+id/tools"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/tools"/>
-        <ImageView
-            android:id="@+id/headset"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/headset"/>
+             <ImageView
+                 android:id="@+id/t_shirts"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/tshirts"/>
+             <ImageView
+                 android:id="@+id/childs"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/childs"/>
+             <ImageView
+                 android:id="@+id/technical"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/tech"/>
+             <ImageView
+                 android:id="@+id/smartphone"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/smartphone"/>
 
-    </LinearLayout>
+         </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linear3_category_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:layout_below="@id/linear2_category_layout">
+         <LinearLayout
+             android:id="@+id/linear2_category_layout"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_centerHorizontal="true"
+             android:layout_marginTop="10dp"
+             android:gravity="center"
+             android:layout_below="@id/linear1_category_layout">
 
-        <ImageView
-            android:id="@+id/printer"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/printer"/>
-        <ImageView
-            android:id="@+id/motorcycle"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/motorcycle"/>
-        <ImageView
-            android:id="@+id/gamepad"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/gamepad"/>
-        <ImageView
-            android:id="@+id/watch"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/watch"/>
+             <ImageView
+                 android:id="@+id/car"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/car"/>
+             <ImageView
+                 android:id="@+id/bike"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/bike"/>
+             <ImageView
+                 android:id="@+id/tools"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/tools"/>
+             <ImageView
+                 android:id="@+id/headset"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/headset"/>
 
-    </LinearLayout>
+         </LinearLayout>
 
-    <Button
+         <LinearLayout
+             android:id="@+id/linear3_category_layout"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_centerHorizontal="true"
+             android:layout_marginTop="10dp"
+             android:gravity="center"
+             android:layout_below="@id/linear2_category_layout">
+
+             <ImageView
+                 android:id="@+id/printer"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/printer"/>
+             <ImageView
+                 android:id="@+id/motorcycle"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/motorcycle"/>
+             <ImageView
+                 android:id="@+id/gamepad"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/gamepad"/>
+             <ImageView
+                 android:id="@+id/watch"
+                 android:layout_width="80dp"
+                 android:layout_height="80dp"
+                 android:src="@drawable/watch"/>
+
+         </LinearLayout>
+     </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+    <android.support.design.button.MaterialButton
         android:id="@+id/check_orders_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        app:cornerRadius="30dp"
+        android:layout_height="50dp"
+        android:gravity="center"
         android:layout_above="@+id/admin_logout_btn"
         android:text="Check New Orders"
         android:layout_marginHorizontal="20dp"
+        android:textColor="@color/black_overlay"
         android:textStyle="bold"
         android:textAllCaps="false"/>
 
-    <Button
+    <android.support.design.button.MaterialButton
         android:id="@+id/admin_logout_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        app:cornerRadius="30dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:textColor="@color/black_overlay"
         android:layout_marginHorizontal="20dp"
         android:text="Logout"
         android:textStyle="bold"

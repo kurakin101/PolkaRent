@@ -1,6 +1,7 @@
 package com.polka.rentplace;
 
 import android.content.Intent;
+import android.support.design.button.MaterialButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,15 +15,15 @@ public class AdminCategoryActivity extends AppCompatActivity {
     private ImageView car, bike, tools, headset;
     private ImageView printer, moto, gamepad, watch;
 
-    private Button LogoutBtn, CheckOrdersBtn;
+    private MaterialButton LogoutBtn, CheckOrdersBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_category);
 
-        LogoutBtn = (Button) findViewById(R.id.admin_logout_btn);
-        CheckOrdersBtn = (Button) findViewById(R.id.check_orders_btn);
+        LogoutBtn = (MaterialButton) findViewById(R.id.admin_logout_btn);
+        CheckOrdersBtn = (MaterialButton) findViewById(R.id.check_orders_btn);
 
         LogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,84 +64,84 @@ public class AdminCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "tShirts");
+                intent.putExtra("category", "Clothes");
                 startActivity(intent);
             }
         });childs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "childs");
+                intent.putExtra("category", "Children");
                 startActivity(intent);
             }
         });techno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "techno");
+                intent.putExtra("category", "Techno");
                 startActivity(intent);
             }
         });smart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "smart");
+                intent.putExtra("category", "Smartphone");
                 startActivity(intent);
             }
         });car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "car");
+                intent.putExtra("category", "Transport");
                 startActivity(intent);
             }
         });bike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "bike");
+                intent.putExtra("category", "Bike");
                 startActivity(intent);
             }
         });tools.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "tools");
+                intent.putExtra("category", "Tools");
                 startActivity(intent);
             }
         });headset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "headset");
+                intent.putExtra("category", "Headset");
                 startActivity(intent);
             }
         });printer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "printer");
+                intent.putExtra("category", "Printer");
                 startActivity(intent);
             }
         });moto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "moto");
+                intent.putExtra("category", "Moto");
                 startActivity(intent);
             }
         });gamepad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "ganepad");
+                intent.putExtra("category", "Game Pad");
                 startActivity(intent);
             }
         });watch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminCategoryActivity.this, AdminAddNewProductActivity.class);
-                intent.putExtra("category", "watch");
+                intent.putExtra("category", "Watch");
                 startActivity(intent);
             }
         });

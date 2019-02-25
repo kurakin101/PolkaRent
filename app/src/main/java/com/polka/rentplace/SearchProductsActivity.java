@@ -1,9 +1,11 @@
 package com.polka.rentplace;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +35,7 @@ public class SearchProductsActivity extends AppCompatActivity implements Materia
     private Button SearchBtn;
     private EditText inputText;
     private RecyclerView searchList;
+    RecyclerView.LayoutManager layoutManager;
     private String SearchInput;
     private MaterialSearchBar searchBar;
 
@@ -44,9 +47,23 @@ public class SearchProductsActivity extends AppCompatActivity implements Materia
         setContentView(R.layout.activity_search_porducts);
 
 
+        int orient = getResources().getConfiguration().orientation;
+        switch(orient) {
+            case Configuration.ORIENTATION_LANDSCAPE:
+                searchList = (RecyclerView) findViewById(R.id.search_list);
+                searchList.setHasFixedSize(true);
+                searchList.setLayoutManager(new GridLayoutManager(this,2));
+                break;
+            case Configuration.ORIENTATION_PORTRAIT:
+                searchList = (RecyclerView) findViewById(R.id.search_list);
+                searchList.setHasFixedSize(true);
+                layoutManager = new LinearLayoutManager(this);
+                searchList.setLayoutManager(layoutManager);
+                break;
+            default:
+        }
 
-        searchList = findViewById(R.id.search_list);
-        searchList.setLayoutManager(new LinearLayoutManager(SearchProductsActivity.this));
+
 
         searchBar = (MaterialSearchBar) findViewById(R.id.searchBar);
 
@@ -129,7 +146,7 @@ public class SearchProductsActivity extends AppCompatActivity implements Materia
                 .setQuery(reference.orderByChild("pname").startAt(SearchInput), Products.class)
                 .build();
 
-        FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter =
+        final FirebaseRecyclerAdapter<Products, ProductViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull final Products model) {

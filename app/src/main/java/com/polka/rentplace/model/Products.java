@@ -2,14 +2,15 @@ package com.polka.rentplace.model;
 
 public class Products {
 
-    private String pname, description, price, image, category, pid, date, time;
+    private String pname, description, price, image, category, pid, date, time, p2;
 
     public Products(){
 
     }
 
-    public Products(String pname, String description, String price, String image, String category, String pid, String date, String time) {
+    public Products(String pname,String p2, String description, String price, String image, String category, String pid, String date, String time) {
         this.pname = pname;
+        this.p2 = p2;
         this.description = description;
         this.price = price;
         this.image = image;
@@ -25,6 +26,14 @@ public class Products {
 
     public void setPname(String pname) {
         this.pname = pname;
+    }
+
+    public String getP2() {
+        return p2;
+    }
+
+    public void setP2(String p2) {
+        this.p2 = p2;
     }
 
     public String getDescription() {
