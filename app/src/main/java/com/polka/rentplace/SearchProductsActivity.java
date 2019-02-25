@@ -52,7 +52,7 @@ public class SearchProductsActivity extends AppCompatActivity implements Materia
             case Configuration.ORIENTATION_LANDSCAPE:
                 searchList = (RecyclerView) findViewById(R.id.search_list);
                 searchList.setHasFixedSize(true);
-                searchList.setLayoutManager(new GridLayoutManager(this,2));
+                searchList.setLayoutManager(new GridLayoutManager(this,3));
                 break;
             case Configuration.ORIENTATION_PORTRAIT:
                 searchList = (RecyclerView) findViewById(R.id.search_list);
