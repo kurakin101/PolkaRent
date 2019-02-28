@@ -54,18 +54,20 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder, final int position, @NonNull final AdminOrders model) {
 
-                        holder.userPhoneNumber.setText(model.getPhone());
+ordersList.setVisibility(View.INVISIBLE);
+
 
                         String p = Prevalent.currentOnlineUser.getPhone();
-                        String y = holder.userPhoneNumber.getText().toString();
+                        holder.userPhoneNumber.setText(model.getPhone());
 
-                            if (p.equals(y)){
-                                holder.userName.setText("Name: " + model.getName());
-                                holder.userTotalPrice.setText("Total Amount: " + model.getTotalAmount());
-                                holder.userDateTime.setText("Order at: " + model.getDate() + "  " + model.getTime());
-                                holder.userShippingAddress.setText("Shipping Address: " + model.getAddress() + ", " + model.getCity());
-                            }else{
-                                ordersList.setVisibility(View.INVISIBLE);
+                        holder.userName.setText("Name: " + model.getName());
+                        holder.userTotalPrice.setText("Total Amount: " + model.getTotalAmount());
+                        holder.userDateTime.setText("Order at: " + model.getDate() + "  " + model.getTime());
+                        holder.userShippingAddress.setText("Shipping Address: " + model.getAddress() + ", " + model.getCity());
+
+                            if ("22" == "22"){
+                                ordersList.setVisibility(View.VISIBLE);
+
                             }
 
 
