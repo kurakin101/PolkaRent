@@ -25,10 +25,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.polka.rentplace.model.Cart;
-import com.polka.rentplace.model.Products;
 import com.polka.rentplace.prevalent.Prevalent;
 import com.polka.rentplace.viewHolder.CartViewHolder;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -37,7 +38,6 @@ public class CartActivity extends AppCompatActivity {
 
     private Button NextProcessBtn;
     private TextView txtTotalAmount,txtMsg1;
-
 
     private int overTotalPrice = 0;
 
@@ -87,17 +87,22 @@ public class CartActivity extends AppCompatActivity {
                         .child("Products"), Cart.class)
                         .build();
 
-
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
                 = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull final Cart model) {
 
-                holder.txtProductQuantiny.setText("Quantity = " + model.getQuantiny());
+                holder.txtProductQuantiny.setText("Quantity = " + model.getQuantity());
                 holder.txtProductPrice.setText("Price = " + model.getPrice());
-                holder.txtProductName.setText("Product = " + model.getPname());
+                holder.txtProductName.setText(model.getPhone());
                 Picasso.get().load(model.getImage()).into(holder.imgProductImg);
 //
+                String p = (String) holder.txtProductName.getText();
+
+                Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
+                intent.putExtra("phone", p);
+                startActivity(intent);
+                finish();
 //                int oneTypeProductPrice = ((Integer.valueOf(model.getPrice().replace("₽","")))) * Integer.valueOf(model.getQuantiny());
                 overTotalPrice =  4;
 //
@@ -136,6 +141,7 @@ public class CartActivity extends AppCompatActivity {
                                                         intent.putExtra("pid", model.getPid());
                                                         startActivity(intent);
 
+//
                                                     }
                                                }
                                           });
@@ -146,6 +152,42 @@ public class CartActivity extends AppCompatActivity {
                   }
               });
             }
+
+//            private  void  sendToOrder(){
+//                final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference()
+//                        .child("Orders")
+//                        .child(Prevalent.currentOnlineUser.getPhone());
+//
+//                HashMap<String, Object> orderMap = new HashMap<>();
+//
+//                orderMap.put("phone", p);
+//
+//                orderRef.updateChildren(orderMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if (task.isSuccessful()){
+//                            FirebaseDatabase.getInstance().getReference()
+//                                    .child("Cart List")
+//                                    .child("User View")
+//                                    .child(Prevalent.currentOnlineUser.getPhone())
+//                                    .removeValue()
+//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<Void> task) {
+//                                            if (task.isSuccessful()){
+//                                                Toast.makeText(ConfirmFinalOrderActivity.this, "your final order has been placed successfully.", Toast.LENGTH_SHORT).show();
+//
+//                                                Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
+//                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                                startActivity(intent);
+//                                                finish();
+//                                            }
+//                                        }
+//                                    });
+//                        }
+//                    }
+//                });
+//            }
 
             @NonNull
             @Override
@@ -174,7 +216,7 @@ public class CartActivity extends AppCompatActivity {
                     String userName = dataSnapshot.child("name").getValue().toString();
                     if (shippingState.equals("shipped")){
 
-                        txtTotalAmount.setText("Dear" + userName + "\n  order is shipped successfully.");
+                        txtTotalAmount.setText("Dear " + userName + "\n  order is shipped successfully.");
                         recyclerView.setVisibility(View.GONE);
 
                         txtMsg1.setVisibility(View.VISIBLE);
@@ -183,7 +225,8 @@ public class CartActivity extends AppCompatActivity {
                         Toast.makeText(CartActivity.this, "you can purchase more products , once you receivd your first order.", Toast.LENGTH_SHORT).show();
 
 
-                    }else if (shippingState.equals("not shipped")){
+                    }
+                    else if (shippingState.equals("not shipped")){
                         txtTotalAmount.setText("Shipping State = Not Shipped");
                         recyclerView.setVisibility(View.GONE);
 

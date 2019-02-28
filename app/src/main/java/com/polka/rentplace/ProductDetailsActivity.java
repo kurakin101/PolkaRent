@@ -107,8 +107,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
         cartMap.put("quantity", numberButton.getNumber());
-        cartMap.put("name", p2);
+        cartMap.put("phone", p2);
         cartMap.put("discount", "");
+
+
 
         cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone())
                 .child("Products").child(productID)
@@ -117,7 +119,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getPhone())
+                            cartListRef.child("User View").child(Prevalent.currentOnlineUser.getPhone())
                                     .child("Products").child(productID)
                                     .updateChildren(cartMap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -127,7 +129,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                                 Toast.makeText(ProductDetailsActivity.this, "Added to cart list", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
                                                 startActivity(intent);
-
                                             }
                                         }
                                     });
@@ -176,6 +177,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     else if (shippingText.equals("not shipped")){
                         state = "Order Placed";
                     }
+
                 }
             }
 

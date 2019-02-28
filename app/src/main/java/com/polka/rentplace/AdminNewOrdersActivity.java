@@ -21,6 +21,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.polka.rentplace.model.AdminOrders;
+import com.polka.rentplace.prevalent.Prevalent;
 
 public class AdminNewOrdersActivity extends AppCompatActivity {
 
@@ -43,15 +44,6 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-
-
-
-
-
-
-
-
         FirebaseRecyclerOptions<AdminOrders> options = new
                 FirebaseRecyclerOptions.Builder<AdminOrders>()
                 .setQuery(ordersRef, AdminOrders.class)
@@ -62,11 +54,21 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder, final int position, @NonNull final AdminOrders model) {
 
-                        holder.userName.setText("Name: " + model.getName());
-                        holder.userPhoneNumber.setText("Phone: " + model.getPhone());
-                        holder.userTotalPrice.setText("Total Amount: " + model.getTotalAmount());
-                        holder.userDateTime.setText("Order at: " + model.getDate() + "  " + model.getTime());
-                        holder.userShippingAddress.setText("Shipping Address: " + model.getAddress() + ", " + model.getCity());
+                        holder.userPhoneNumber.setText(model.getPhone());
+
+                        String p = Prevalent.currentOnlineUser.getPhone();
+                        String y = holder.userPhoneNumber.getText().toString();
+
+                            if (p.equals(y)){
+                                holder.userName.setText("Name: " + model.getName());
+                                holder.userTotalPrice.setText("Total Amount: " + model.getTotalAmount());
+                                holder.userDateTime.setText("Order at: " + model.getDate() + "  " + model.getTime());
+                                holder.userShippingAddress.setText("Shipping Address: " + model.getAddress() + ", " + model.getCity());
+                            }else{
+                                ordersList.setVisibility(View.INVISIBLE);
+                            }
+
+
 
                         holder.ShowOrdersBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -77,6 +79,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                                 Intent intent = new Intent(AdminNewOrdersActivity.this, AdminUserProductActivity.class);
                                 intent.putExtra("uid", uID);
                                 startActivity(intent);
+
                             }
                         });
 

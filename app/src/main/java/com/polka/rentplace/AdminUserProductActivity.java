@@ -11,11 +11,19 @@ import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.polka.rentplace.model.Cart;
+import com.polka.rentplace.model.Products;
+import com.polka.rentplace.model.Users;
+import com.polka.rentplace.prevalent.Prevalent;
 import com.polka.rentplace.viewHolder.CartViewHolder;
 import com.squareup.picasso.Picasso;
+
+import io.paperdb.Paper;
 
 public class AdminUserProductActivity extends AppCompatActivity {
 
@@ -24,6 +32,7 @@ public class AdminUserProductActivity extends AppCompatActivity {
    private DatabaseReference cartListRef;
 
    private String userID = "";
+   String p2;
 
 
     @Override
@@ -42,7 +51,7 @@ public class AdminUserProductActivity extends AppCompatActivity {
 
         cartListRef = FirebaseDatabase.getInstance().getReference()
                 .child("Cart List")
-                .child("Admin View").child(userID).child("Products");
+                .child("User View").child(userID).child("Products");
 
     }
 
@@ -56,11 +65,21 @@ public class AdminUserProductActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Cart model) {
-                holder.txtProductQuantiny.setText("Quantity = " + model.getQuantiny());
-                holder.txtProductPrice.setText("Price = " + model.getPrice());
-                holder.txtProductName.setText("Product = " + model.getPname());
+//                p2 = model.getPrice();
+
 //                Picasso.get().load(model.getImage()).into(holder.imgProductImg);
 
+                String d = Prevalent.currentOnlineUser.getPhone();
+
+                holder.txtProductQuantiny.setText(model.getPhone());
+                if (holder.txtProductQuantiny.getText().equals(d)){
+
+
+                    holder.txtProductPrice.setText("Price = " + model.getPrice());
+                    holder.txtProductName.setText("Product = " + model.getPname());
+                }else{
+                    productsList.setVisibility(View.INVISIBLE);
+                }
             }
 
             @NonNull

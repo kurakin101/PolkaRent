@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity
         switch(orient) {
             case Configuration.ORIENTATION_LANDSCAPE:
                 recyclerView = (RecyclerView) findViewById(R.id.recycler_menu);
-                recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+                recyclerView.setLayoutManager(new GridLayoutManager(this,2));
                 break;
             case Configuration.ORIENTATION_PORTRAIT:
                 recyclerView = (RecyclerView) findViewById(R.id.recycler_menu);

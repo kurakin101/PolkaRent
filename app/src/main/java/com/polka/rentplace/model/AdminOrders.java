@@ -2,15 +2,16 @@ package com.polka.rentplace.model;
 
 public class AdminOrders {
 
-    private String name, phone, address, city, state, date, time, totalAmount;
+    private String name, phone, address, city, state, date, time, totalAmount, phoneOrder;
 
 
     public AdminOrders() {
 
     }
 
-    public AdminOrders(String name, String phone, String address, String city, String state, String date, String time, String totalAmount) {
+    public AdminOrders(String name, String phoneOrder, String phone, String address, String city, String state, String date, String time, String totalAmount) {
         this.name = name;
+        this.phoneOrder = phoneOrder;
         this.phone = phone;
         this.address = address;
         this.city = city;
@@ -27,6 +28,16 @@ public class AdminOrders {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    public String getPhoneOrder() {
+        return phoneOrder;
+    }
+
+    public void setPhoneOrder(String phoneOrder) {
+        this.phoneOrder = phoneOrder;
+    }
+
 
     public String getPhone() {
         return phone;

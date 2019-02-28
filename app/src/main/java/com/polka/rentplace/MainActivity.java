@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 import com.polka.rentplace.model.Users;
 import com.polka.rentplace.prevalent.Prevalent;
 
@@ -40,13 +42,14 @@ public class MainActivity extends AppCompatActivity
 
         Paper.init(this);
 
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
+
+
             }
         });
 
@@ -74,6 +77,8 @@ public class MainActivity extends AppCompatActivity
                 loadingBar.setMessage("Please wait.....");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
+
+
             }
         }
     }
@@ -90,16 +95,21 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
+
                 if (dataSnapshot.child("Users").child(phone).exists())
                 {
+
                     Users usersData = dataSnapshot.child("Users").child(phone).getValue(Users.class);
+
 
                     if (usersData.getPhone().equals(phone))
                     {
+
                         if (usersData.getPassword().equals(password))
                         {
                             Toast.makeText(MainActivity.this, "Please wait, you are already logged in...", Toast.LENGTH_SHORT).show();
                             loadingBar.dismiss();
+
 
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                             Prevalent.currentOnlineUser = usersData;
@@ -107,6 +117,7 @@ public class MainActivity extends AppCompatActivity
                         }
                         else
                         {
+
                             loadingBar.dismiss();
                             Toast.makeText(MainActivity.this, "Password is incorrect.", Toast.LENGTH_SHORT).show();
                         }
@@ -114,6 +125,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else
                 {
+
                     Toast.makeText(MainActivity.this, "Account with this " + phone + " number do not exists.", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }

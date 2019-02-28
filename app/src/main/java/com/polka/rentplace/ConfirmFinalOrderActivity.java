@@ -26,6 +26,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     private Button confirmOrderBtn;
 
     private String totalAmount = "";
+    private String p2;
 
 
 
@@ -78,6 +79,9 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
+        p2 = getIntent().getStringExtra("phone");
+
+
         final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference()
                 .child("Orders")
                 .child(Prevalent.currentOnlineUser.getPhone());
@@ -92,6 +96,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         orderMap.put("date", saveCurrentDate);
         orderMap.put("time", saveCurrentTime);
         orderMap.put("state", "not shipped");
+        orderMap.put("phone", p2);
 
         orderRef.updateChildren(orderMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -121,7 +126,4 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
 
     }
-
-
-
 }
