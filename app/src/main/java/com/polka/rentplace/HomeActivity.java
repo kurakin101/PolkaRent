@@ -266,7 +266,8 @@ public class HomeActivity extends AppCompatActivity
             Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_categories) {
-
+            Intent intent = new Intent(HomeActivity.this, TestActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
             startActivity(intent);

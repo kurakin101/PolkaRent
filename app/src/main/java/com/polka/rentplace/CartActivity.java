@@ -99,10 +99,6 @@ public class CartActivity extends AppCompatActivity {
 //
                 String p = (String) holder.txtProductName.getText();
 
-                Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
-                intent.putExtra("phone", p);
-                startActivity(intent);
-                finish();
 //                int oneTypeProductPrice = ((Integer.valueOf(model.getPrice().replace("₽","")))) * Integer.valueOf(model.getQuantiny());
                 overTotalPrice =  4;
 //

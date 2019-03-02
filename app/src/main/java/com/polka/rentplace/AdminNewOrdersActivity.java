@@ -21,7 +21,6 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.polka.rentplace.model.AdminOrders;
-import com.polka.rentplace.prevalent.Prevalent;
 
 public class AdminNewOrdersActivity extends AppCompatActivity {
 
@@ -54,23 +53,11 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                     @Override
                     protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder, final int position, @NonNull final AdminOrders model) {
 
-ordersList.setVisibility(View.INVISIBLE);
-
-
-                        String p = Prevalent.currentOnlineUser.getPhone();
-                        holder.userPhoneNumber.setText(model.getPhone());
-
                         holder.userName.setText("Name: " + model.getName());
+                        holder.userPhoneNumber.setText("Phone: " + model.getPhone());
                         holder.userTotalPrice.setText("Total Amount: " + model.getTotalAmount());
                         holder.userDateTime.setText("Order at: " + model.getDate() + "  " + model.getTime());
                         holder.userShippingAddress.setText("Shipping Address: " + model.getAddress() + ", " + model.getCity());
-
-                            if ("22" == "22"){
-                                ordersList.setVisibility(View.VISIBLE);
-
-                            }
-
-
 
                         holder.ShowOrdersBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
