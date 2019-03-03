@@ -141,7 +141,7 @@
 
 
 
-    <android.support.design.button.MaterialButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/check_orders_btn"
         android:layout_width="match_parent"
         android:elevation="8dp"
@@ -155,7 +155,7 @@
         android:textStyle="bold"
         android:textAllCaps="false"/>
 
-    <android.support.design.button.MaterialButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/admin_logout_btn"
         android:layout_width="match_parent"
         android:elevation="8dp"

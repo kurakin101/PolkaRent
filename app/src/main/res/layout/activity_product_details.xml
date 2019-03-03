@@ -66,7 +66,7 @@
 
     </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
-    <android.support.design.button.MaterialButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/pd_add_to_cart_button"
         android:layout_width="match_parent"
         android:layout_height="64dp"

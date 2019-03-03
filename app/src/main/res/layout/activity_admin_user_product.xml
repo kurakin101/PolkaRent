@@ -30,10 +30,10 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/products_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/r3">
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

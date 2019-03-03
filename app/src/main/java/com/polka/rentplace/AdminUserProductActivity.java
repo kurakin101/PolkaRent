@@ -1,29 +1,21 @@
 package com.polka.rentplace;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.polka.rentplace.model.Cart;
-import com.polka.rentplace.model.Products;
-import com.polka.rentplace.model.Users;
 import com.polka.rentplace.prevalent.Prevalent;
 import com.polka.rentplace.viewHolder.CartViewHolder;
-import com.squareup.picasso.Picasso;
-
-import io.paperdb.Paper;
 
 public class AdminUserProductActivity extends AppCompatActivity {
 
@@ -70,11 +62,8 @@ public class AdminUserProductActivity extends AppCompatActivity {
 //                Picasso.get().load(model.getImage()).into(holder.imgProductImg);
 
                 String d = Prevalent.currentOnlineUser.getPhone();
-
                 holder.txtProductQuantiny.setText(model.getPhone());
                 if (holder.txtProductQuantiny.getText().equals(d)){
-
-
                     holder.txtProductPrice.setText("Price = " + model.getPrice());
                     holder.txtProductName.setText("Product = " + model.getPname());
                 }else{

@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TestActivity">
+    tools:context=".MLVisioin.CameraFragment$TestActivity">
 
     <fragment
         android:id="@+id/fragment_container"
-        android:name="com.polka.rentplace.CameraFragment"
+        android:name="com.polka.rentplace.MLVisioin.CameraFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

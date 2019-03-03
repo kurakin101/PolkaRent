@@ -1,27 +1,21 @@
 package com.polka.rentplace;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.button.MaterialButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -45,10 +39,7 @@ import com.google.firebase.storage.UploadTask;
 import com.polka.rentplace.model.Users;
 import com.polka.rentplace.prevalent.Prevalent;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -278,12 +269,12 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                 {
                     Users usersData = dataSnapshot.child(users).child(phone).getValue(Users.class);
 
-//                    if (usersData.getPhone().equals(phone))
-//                    {
-//                        if (usersData.getPassword().equals(password))
-//                        {
-//                           if (users.equals("Users"))
-//                            {
+                    if (usersData.getPhone().equals(phone))
+                    {
+                        if (usersData.getPassword().equals(password))
+                        {
+                           if (users.equals("Users"))
+                            {
                                 HashMap<String, Object> productMap = new HashMap<>();
                                 productMap.put("pid", productRandomKey);
                                 productMap.put("date", saveCurrentDate);
@@ -317,14 +308,14 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                                                 }
                                             }
                                         });
-//                            }
-//                        }
-//                        else
-//                        {
-//                            loadingBar.dismiss();
-//                            Toast.makeText(AdminAddNewProductActivity.this, "Password is incorrect.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
+                            }
+                        }
+                        else
+                        {
+                            loadingBar.dismiss();
+                            Toast.makeText(AdminAddNewProductActivity.this, "Password is incorrect.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
                 }
                 else
                 {

@@ -2,12 +2,12 @@ package com.polka.rentplace;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +24,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.polka.rentplace.MLVisioin.CameraFragment;
 import com.polka.rentplace.model.Cart;
 import com.polka.rentplace.prevalent.Prevalent;
 import com.polka.rentplace.viewHolder.CartViewHolder;
 import com.squareup.picasso.Picasso;
-
-import java.util.HashMap;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -63,9 +62,9 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 //                txtTotalAmount.setText("Total price =  " +  "4");
-
-                Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
-                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                Intent exIntent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
+                exIntent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                Intent intent = new Intent(CartActivity.this, CameraFragment.TestActivity.class);
                 startActivity(intent);
                 finish();
             }
