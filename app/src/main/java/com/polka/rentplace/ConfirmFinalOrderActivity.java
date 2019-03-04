@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.polka.rentplace.prevalent.Prevalent;
@@ -22,8 +24,8 @@ import java.util.HashMap;
 
 public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
-    private EditText nameEditText, phoneEditText, addressEditText, cityEditText;
-    private Button confirmOrderBtn;
+    private TextInputEditText nameEditText, phoneEditText, addressEditText, cityEditText;
+    private MaterialButton confirmOrderBtn;
 
     private String totalAmount = "";
 
@@ -38,11 +40,11 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         totalAmount = getIntent().getStringExtra("Total Price");
         Toast.makeText(this, "Total Price = " + totalAmount, Toast.LENGTH_SHORT).show();
 
-        confirmOrderBtn = (Button) findViewById(R.id.confirm_final_order_btn);
-        nameEditText = (EditText) findViewById(R.id.shipment_name);
-        phoneEditText = (EditText) findViewById(R.id.shipment_phone_number);
-        addressEditText = (EditText) findViewById(R.id.shipment_address);
-        cityEditText = (EditText) findViewById(R.id.shipment_city);
+        confirmOrderBtn = (MaterialButton) findViewById(R.id.confirm_final_order_btn);
+        nameEditText = (TextInputEditText) findViewById(R.id.shipment_name_ed);
+        phoneEditText = (TextInputEditText) findViewById(R.id.shipment_phone_number_ed);
+        addressEditText = (TextInputEditText) findViewById(R.id.shipment_address_ed);
+        cityEditText = (TextInputEditText) findViewById(R.id.shipment_city_ed);
 
 
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
@@ -108,10 +110,13 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                                       if (task.isSuccessful()){
                                           Toast.makeText(ConfirmFinalOrderActivity.this, "your final order has been placed successfully.", Toast.LENGTH_SHORT).show();
 
-                                          Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
-                                          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                          startActivity(intent);
-                                          finish();
+                                          Intent intent1 = new Intent(ConfirmFinalOrderActivity.this, UserPayment.class);
+                                          startActivity(intent1);
+//
+//                                          Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
+//                                          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                          startActivity(intent);
+//                                          finish();
                                       }
                                     }
                                 });

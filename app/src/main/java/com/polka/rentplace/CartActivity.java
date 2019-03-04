@@ -64,9 +64,9 @@ public class CartActivity extends AppCompatActivity {
 //                txtTotalAmount.setText("Total price =  " +  "4");
                 Intent exIntent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
                 exIntent.putExtra("Total Price", String.valueOf(overTotalPrice));
-                Intent intent = new Intent(CartActivity.this, CameraFragment.TestActivity.class);
-                startActivity(intent);
                 finish();
+                Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
+                startActivity(intent);
             }
         });
 

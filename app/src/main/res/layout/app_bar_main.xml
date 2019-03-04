@@ -11,22 +11,12 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <com.mancj.materialsearchbar.MaterialSearchBar
-            android:id="@+id/searchBar"
-            style="@style/MaterialSearchBarLight"
+        <com.github.florent37.awesomebar.AwesomeBar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:mt_searchIconDrawable="@drawable/ic_search"
-            app:mt_navIconEnabled="true"
-            app:mt_hintColor="@color/colorPrimary"
-            app:mt_textColor="@color/colorPrimary"
-            app:mt_highlightedTextColor="@color/colorPrimary"
-            app:mt_placeholderColor="@color/colorPrimary"
-            app:mt_dividerColor="@color/colorPrimary"
-            app:mt_roundedSearchBarEnabled="true"
-            app:mt_placeholder="Search" />
-
+            android:layout_height="wrap_content"
+            android:background="@color/black_overlay"
+            android:elevation="8dp" />
 
 
     </com.google.android.material.appbar.AppBarLayout>

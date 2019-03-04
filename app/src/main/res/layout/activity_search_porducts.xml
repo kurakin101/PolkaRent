@@ -10,8 +10,10 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
+        android:elevation="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/black_overlay"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <com.mancj.materialsearchbar.MaterialSearchBar

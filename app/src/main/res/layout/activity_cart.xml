@@ -55,7 +55,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/next_process_btn"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="64dp"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -64,7 +64,9 @@
         android:background="@color/colorPrimaryDark"
         android:elevation="8dp"
         android:gravity="center"
+        android:textSize="20dp"
         android:text="Next"
+        android:textAllCaps="false"
         android:textColor="@color/black_overlay"
         android:textStyle="bold"
         app:cornerRadius="30dp" />

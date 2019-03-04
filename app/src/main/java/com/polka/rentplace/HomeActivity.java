@@ -1,13 +1,19 @@
 package com.polka.rentplace;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.github.florent37.awesomebar.ActionItem;
+import com.github.florent37.awesomebar.AwesomeBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import com.google.android.material.navigation.NavigationView;
@@ -19,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -28,10 +35,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.polka.rentplace.MLVisioin.CameraFragment;
 import com.polka.rentplace.model.Products;
+import com.polka.rentplace.prevalent.Prevalent;
 import com.polka.rentplace.viewHolder.ProductViewHolder;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
 import io.paperdb.Paper;
 
 public class HomeActivity extends AppCompatActivity
@@ -42,7 +51,8 @@ public class HomeActivity extends AppCompatActivity
     RecyclerView.LayoutManager layoutManager;
     private FloatingToolbar mFloatingToolbar;
     private FloatingActionButton fab;
-    private MaterialSearchBar searchBar;
+    AwesomeBar bar;
+    DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +81,14 @@ public class HomeActivity extends AppCompatActivity
 
         Paper.init(this);
 
-        searchBar = (MaterialSearchBar) findViewById(R.id.searchBar);
-        searchBar.setOnSearchActionListener(this);
 
-        searchBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this,   SearchProductsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
+        drawer = findViewById(R.id.drawer_layout);
+        bar = (AwesomeBar) findViewById(R.id.toolbar);
         mFloatingToolbar = findViewById(R.id.floatingToolbar);
         mFloatingToolbar.addMorphListener(this);
         mFloatingToolbar.setClickListener(this);
+
+
 
         fab = findViewById(R.id.fab);
 
@@ -108,34 +111,6 @@ public class HomeActivity extends AppCompatActivity
 
 
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
-
-
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-//        drawer.addDrawerListener(toggle);
-//        toggle.syncState();
-
-        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer,
-                null,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -143,11 +118,37 @@ public class HomeActivity extends AppCompatActivity
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
 
-//        userNameTextView.setText(Prevalent.currentOnlineUser.getName());
-//        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
+        userNameTextView.setText(Prevalent.currentOnlineUser.getName());
+        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
 
 
 
+        bar.addAction(R.drawable.ic_search_white_48dp, "search product");
+        bar.setActionItemClickListener(new AwesomeBar.ActionItemClickListener() {
+            @Override
+            public void onActionItemClicked(int position, ActionItem actionItem) {
+                Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        bar.setOverflowActionItemClickListener(new AwesomeBar.OverflowActionItemClickListener() {
+            @Override
+            public void onOverflowActionItemClicked(int position, String item) {
+                Toasty.info(getBaseContext(), item+" clicked", Toast.LENGTH_LONG).show();
+            }
+
+        });
+
+        bar.setOnMenuClickedListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
+            @Override
+            public void onClick(View v) {
+                drawer.openDrawer(Gravity.START);
+            }
+        });
+
+        bar.displayHomeAsUpEnabled(false);
 
 
         mFloatingToolbar.setClickListener(new FloatingToolbar.ItemClickListener() {
@@ -236,17 +237,6 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if (id == R.id.itemCart) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -257,8 +247,8 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_search) {
             Intent intent = new Intent(HomeActivity.this, SearchProductsActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_categories) {
-            Intent intent = new Intent(HomeActivity.this, CameraFragment.TestActivity.class);
+        } else if (id == R.id.nav_orders) {
+            Intent intent = new Intent(HomeActivity.this, AdminNewOrdersActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_settings) {
             Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
@@ -323,11 +313,7 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onButtonClicked(int buttonCode) {
-//        switch (buttonCode){
-//            case MaterialSearchBar.BUTTON_BACK:
-//                searchBar.disableSearch();
-//                break;
-//        }
+
     }
 
 

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.polka.rentplace.model.AdminOrders;
@@ -25,6 +26,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
 
     private RecyclerView ordersList;
     private DatabaseReference ordersRef;
+    private FloatingActionButton fab;
 
 
     @Override
@@ -32,10 +34,21 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_new_orders);
 
+        fab = findViewById(R.id.fab);
+
         ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders");
 
         ordersList = findViewById(R.id.orders_list);
         ordersList.setLayoutManager(new LinearLayoutManager(this));
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminNewOrdersActivity.this, OwnerPayment.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
