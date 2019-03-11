@@ -171,16 +171,6 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
-//        Calendar calendar = Calendar.getInstance();
-//
-//        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
-//        saveCurrentDate = currentDate.format(calendar.getTime());
-//
-//        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-//        saveCurrentTime = currentTime.format(calendar.getTime());
-
-
-
 
         productRandomKey = UUID.randomUUID().toString();
 
@@ -223,8 +213,8 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
                             Toast.makeText(AdminAddNewProductActivity.this, "Products image save to Database Successfully..", Toast.LENGTH_SHORT).show();
 
-                            String phone = Paper.book().read(Prevalent.UserPhoneKey);
-                            String password = Paper.book().read(Prevalent.UserPasswordKey);
+                            String phone = Prevalent.currentOnlineUser.getPhone();
+                            String password = Prevalent.currentOnlineUser.getPassword();
 
                             if (phone != "" && password != "") {
 
@@ -288,12 +278,13 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
                                 productMap.put("password", password);
 
                                 ProductsRef.child(productRandomKey).updateChildren(productMap)
+
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()){
 
-                                                    Intent intent = new Intent(AdminAddNewProductActivity.this, AdminCategoryActivity.class);
+                                                    Intent intent = new Intent(AdminAddNewProductActivity.this, HomeActivity.class);
                                                     startActivity(intent);
 
 

@@ -18,8 +18,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,17 +66,15 @@ public class CameraFragment extends Fragment {
 
     private TextureView mTextureView; // для превью с камеры
     private FaceView mFaceView; // для контуров лиц
-    //private TextView mTextView; // для результата Image Labeling
 
     private HandlerThread mBackgroundThread;
     private Handler mBackgroundHandler;
 
 
-    //private FirebaseVisionLabelDetector mFirebaseLabelDetector; // детектор предметов
     private FirebaseVisionFaceDetector mFirebaseFaceDetector; // детектор лиц
 
     public CameraFragment() {
-        // stub
+
     }
 
     @Override
@@ -90,14 +88,12 @@ public class CameraFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mTextureView = view.findViewById(R.id.texture_view);
         mFaceView = view.findViewById(R.id.face_view);
-        //mTextView = view.findViewById(R.id.text_view);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        //initializeFirebaseLabelDetector();
         initializeFirebaseFaceDetector();
 
         if (mTextureView.isAvailable()) {
@@ -120,28 +116,16 @@ public class CameraFragment extends Fragment {
         }
     }
 
-    /*private void initializeFirebaseLabelDetector() {
-        // создаём настройки
-        final FirebaseVisionLabelDetectorOptions options =
-                new FirebaseVisionLabelDetectorOptions.Builder()
-                        .setConfidenceThreshold(0.8f)
-                        .build();
-        // создаём FirebaseVisionLabelDetector
-        mFirebaseLabelDetector = FirebaseVision.getInstance()
-                .getVisionLabelDetector(options);
-    }*/
-
     private void initializeFirebaseFaceDetector() {
-        // настраиваем детектор лиц
+
         FirebaseVisionFaceDetectorOptions options =
                 new FirebaseVisionFaceDetectorOptions.Builder()
                         .setContourMode(FirebaseVisionFaceDetectorOptions.ALL_CONTOURS)
                         .setClassificationMode(FirebaseVisionFaceDetectorOptions.ALL_CLASSIFICATIONS)
                         .setLandmarkMode(FirebaseVisionFaceDetectorOptions.ALL_LANDMARKS)
-//                        .setMinFaceSize(0.1f)
-//                        .setPerformanceMode(FirebaseVisionFaceDetectorOptions.FAST)
+
                         .build();
-        // создаём детектор лиц
+
         mFirebaseFaceDetector = FirebaseVision.getInstance()
                 .getVisionFaceDetector(options);
     }
@@ -270,34 +254,6 @@ public class CameraFragment extends Fragment {
     private boolean mFirebaseLabelDetectingStarted = false;
     private boolean mFirebaseFaceDetectingStarted = false;
 
-    /*private void startFirebaseLabelDetecting() {
-        // если ещё не стартовали обработку
-        if (!mFirebaseLabelDetectingStarted) {
-            // то стартуем её (меняем флаг на true)
-            mFirebaseLabelDetectingStarted = true;
-            //processFirebaseLabelDetecting();
-        }
-    }
-
-    /*private void processFirebaseLabelDetecting() {
-        final long now = currentTimeMillis(); // запоминаем время старта обработки
-        Bitmap bitmap = mTextureView.getBitmap(); // получаем битмап из TextureView
-        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap); // преобразовываем в нужный формат
-        mFirebaseLabelDetector.detectInImage(image) // запускаем детектирование
-                .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionLabel>>() {
-                    @Override
-                    public void onSuccess(List<FirebaseVisionLabel> firebaseLabels) {
-                        String result = (currentTimeMillis() - now) + "ms\n"; // в текстовое поле пишем время, которое потратили на запрос
-                        final List<String> labels = new ArrayList<>(); // создаём список пустой
-                        for (FirebaseVisionLabel firebaseLabel : firebaseLabels) { // смотрим на то, что получили от ML Kit
-                            // и пишем название предмета и его confidence
-                            result += firebaseLabel.getLabel() + " - " + firebaseLabel.getConfidence() + "\n";
-                        }
-                        mTextView.setText(result); // отображаем из в TextView через запятую
-                        processFirebaseLabelDetecting();
-                    }
-                });
-    }*/
 
     private void startFirebaseFaceDetecting() {
         // если ещё не стартовали обработку
@@ -329,12 +285,7 @@ public class CameraFragment extends Fragment {
                         // рисуем контуры лиц
                         mFaceView.showFaces(firebaseFaces, 1 / FACE_IMAGE_SCALE );
                         processFirebaseFaceDetecting();
-                        /*if (mFirebaseFaceDetector != null){
-                            Intent intent = new Intent(CameraFragment.this.getActivity(),NextActivity.class);
-                            startActivity(intent);
-                        }else {
 
-                        }*/
                         if (Face.faceResult != 0){
                             Intent intent = new Intent(CameraFragment.this.getActivity(),LoginActivity.class);
                             startActivity(intent);
