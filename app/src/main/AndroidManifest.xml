@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".UserPayment"></activity>
         <activity android:name=".OwnerPayment" />
-        <activity android:name=".MLVisioin.CameraFragment$TestActivity" />
+        <activity android:name=".mlvision.CameraFragment$TestActivity" />
         <activity android:name=".SearchProductsActivity" />
         <activity android:name=".AdminUserProductActivity" />
         <activity android:name=".AdminNewOrdersActivity" />

@@ -24,7 +24,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.polka.rentplace.MLVisioin.CameraFragment;
 import com.polka.rentplace.model.Cart;
 import com.polka.rentplace.prevalent.Prevalent;
 import com.polka.rentplace.viewHolder.CartViewHolder;

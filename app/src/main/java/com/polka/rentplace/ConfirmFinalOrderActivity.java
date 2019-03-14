@@ -14,18 +14,26 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.polka.rentplace.prevalent.Prevalent;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
     private TextInputEditText nameEditText, phoneEditText, addressEditText, cityEditText;
     private MaterialButton confirmOrderBtn;
+    private FirebaseDatabase mFirebaseInstance;
 
     private String totalAmount = "";
 
@@ -50,7 +58,36 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         confirmOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Check();
+
+                DatabaseReference cartRef;
+                cartRef = FirebaseDatabase.getInstance().getReference()
+                        .child("Cart List")
+                        .child("User View")
+                        .child(Prevalent.currentOnlineUser.getPhone())
+                        .child("Products");
+
+                cartRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()){
+                            String shippingState = dataSnapshot.getValue().toString();
+
+                            List <String> l =  new ArrayList<>();
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                l.add(dataSnapshot1.child("phone").getValue().toString());
+                            }
+                            phoneEditText.setText(TextUtils.join(",", l));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+//                Check();
             }
         });
 
@@ -83,6 +120,9 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference()
                 .child("Orders")
                 .child(Prevalent.currentOnlineUser.getPhone());
+
+
+
 
         HashMap<String, Object> orderMap = new HashMap<>();
 
@@ -126,4 +166,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
 
 
     }
+
+
+
 }
