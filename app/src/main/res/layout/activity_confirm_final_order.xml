@@ -1,151 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
     android:background="@color/black_overlay"
     tools:context=".ConfirmFinalOrderActivity">
 
-    <TextView
-        android:id="@+id/txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_above="@+id/r1"
-        android:layout_marginBottom="64dp"
-        android:text="Please write your Shipment Details"
-        android:textColor="@color/colorPrimary"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-
 
 <RelativeLayout
-    android:id="@+id/r1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:layout_marginHorizontal="16dp"
-    android:layout_centerInParent="true">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/shipment_name_in"
-        android:layout_width="match_parent"
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeWidth="4dp"
-        android:textColorHint="@color/colorPrimary"
-        app:boxStrokeColor="@color/colorPrimary"
-        android:outlineSpotShadowColor="@color/colorPrimary"
-        android:outlineAmbientShadowColor="@color/colorPrimary"
-        >
+        android:gravity="center"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="42dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_centerInParent="true">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/shipment_name_ed"
+
+
+        <TextView
+            android:id="@+id/txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Your Name"
+            android:layout_marginBottom="42dp"
+            android:layout_marginHorizontal="16dp"
+            android:text="Please write your Shipment Details"
+            android:textColor="@color/colorPrimary"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/lin1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_below="@id/txt"
+            android:orientation="horizontal">
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/shipment_name_in"
+                android:layout_below="@+id/settings_last_name_in"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeWidth="4dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="3dp"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                app:boxCornerRadiusBottomStart="30dp"
+                android:textColorHint="@color/colorPrimary"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:outlineAmbientShadowColor="@color/colorPrimary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/shipment_name_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:outlineSpotShadowColor="@color/colorPrimary"
+                    android:hint="Name"
+                    android:textStyle="bold" />
+
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/shipment_last_name_in"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:boxStrokeWidth="4dp"
+                android:layout_marginStart="3dp"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                app:boxCornerRadiusBottomStart="30dp"
+                android:textColorHint="@color/colorPrimary"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:outlineAmbientShadowColor="@color/colorPrimary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/shipment_last_name_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:outlineSpotShadowColor="@color/colorPrimary"
+                    android:hint="LastName"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </LinearLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/shipment_fathers_name_in"
+            android:layout_below="@+id/lin1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_height="wrap_content"
+            app:boxStrokeWidth="4dp"
+            android:layout_weight="1"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            android:textColorHint="@color/colorPrimary"
+            app:boxStrokeColor="@color/colorPrimary"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            android:outlineAmbientShadowColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/shipment_fathers_name_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:hint="FatherName"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/shipment_passport_in"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_below="@+id/shipment_fathers_name_in"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeWidth="4dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            android:textColorHint="@color/colorPrimary"
+            app:boxStrokeColor="@color/colorPrimary"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            android:outlineAmbientShadowColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/shipment_passport_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:hint="Passport series"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/shipment_phone_in"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_below="@+id/shipment_passport_in"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeWidth="4dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            android:textColorHint="@color/colorPrimary"
+            app:boxStrokeColor="@color/colorPrimary"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            android:outlineAmbientShadowColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/shipment_phone_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:hint="Phone Number"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/shipment_address_in"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_below="@+id/shipment_phone_in"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeWidth="4dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            android:layout_marginBottom="42dp"
+            android:textColorHint="@color/colorPrimary"
+            app:boxStrokeColor="@color/colorPrimary"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            android:outlineAmbientShadowColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/shipment_address_ed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:hint="Address"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirm_final_order_btn"
+            app:cornerRadius="30dp"
+            android:elevation="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:textColor="@color/black_overlay"
+            android:layout_marginHorizontal="15dp"
+            android:layout_below="@id/shipment_address_in"
             android:textStyle="bold"
-            android:outlineSpotShadowColor="@color/colorPrimary"
-            android:textColor="@color/colorPrimary" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:text="Confirm"/>
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/shipment_phone_number_in"
-        android:layout_below="@+id/shipment_name_in"
-        android:layout_marginTop="10dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxStrokeWidth="4dp"
-        android:textColorHint="@color/colorPrimary"
-        app:boxStrokeColor="@color/colorPrimary"
-        android:outlineSpotShadowColor="@color/colorPrimary"
-        android:outlineAmbientShadowColor="@color/colorPrimary"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/shipment_phone_number_ed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:outlineSpotShadowColor="@color/colorPrimary"
-            android:hint="Your Phone Number"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/shipment_address_in"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/shipment_phone_number_in"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxStrokeWidth="4dp"
-        android:textColorHint="@color/colorPrimary"
-        app:boxStrokeColor="@color/colorPrimary"
-        android:outlineSpotShadowColor="@color/colorPrimary"
-        android:outlineAmbientShadowColor="@color/colorPrimary">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/shipment_address_ed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:outlineSpotShadowColor="@color/colorPrimary"
-            android:hint="Your Address"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/shipment_city_in"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/shipment_address_in"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxStrokeWidth="4dp"
-        android:textColorHint="@color/colorPrimary"
-        app:boxStrokeColor="@color/colorPrimary"
-        android:outlineSpotShadowColor="@color/colorPrimary"
-        android:outlineAmbientShadowColor="@color/colorPrimary">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/shipment_city_ed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textColor="@color/colorPrimary"
-            android:outlineSpotShadowColor="@color/colorPrimary"
-            android:hint="Your City"
-            android:textStyle="bold" />
-    </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
 
 
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/confirm_final_order_btn"
-        app:cornerRadius="30dp"
-        android:elevation="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:textColor="@color/black_overlay"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        android:text="Confirm"/>
-
-
-</RelativeLayout>
+</ScrollView>

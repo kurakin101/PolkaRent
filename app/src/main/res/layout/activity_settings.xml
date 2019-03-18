@@ -1,109 +1,261 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:background="@color/black_overlay"
     tools:context=".SettingsActivity">
 
-    
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar_settings"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_settings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="42dp"
+            android:layout_marginTop="42dp">
 
-            <RelativeLayout
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/settings_profile_image"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/profile"
+                android:background="@drawable/corners_130"
+                android:layout_centerHorizontal="true"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/profile_image_change_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                app:cornerRadius="30dp"
+                android:text="Change Profile"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/settings_profile_image"
+                android:layout_centerHorizontal="true"
+                android:textAllCaps="false"
+                android:layout_marginRight="10dp"/>
+
+
+            <LinearLayout
+                android:id="@+id/lin1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_below="@id/profile_image_change_btn"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/close_settings_btn"
-                    android:layout_width="wrap_content"
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/settings_full_name_in"
+                    android:layout_below="@+id/settings_last_name_in"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Close"
-                    android:textColor="@color/black_overlay"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_alignParentStart="true"
-                    tools:ignore="RtlCompat" />
+                    app:boxStrokeWidth="4dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="3dp"
+                    app:boxCornerRadiusTopStart="30dp"
+                    app:boxCornerRadiusTopEnd="30dp"
+                    android:textColorHint="@color/colorPrimary"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    android:outlineSpotShadowColor="@color/colorPrimary"
+                    android:outlineAmbientShadowColor="@color/colorPrimary">
 
-                <TextView
-                    android:id="@+id/update_account_settings_btn"
-                    android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/settings_full_name_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:outlineSpotShadowColor="@color/colorPrimary"
+                        android:hint="Name"
+                        android:textStyle="bold" />
+
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/settings_last_name_in"
+                    android:layout_below="@+id/profile_image_change_btn"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Update"
-                    android:textColor="@color/black_overlay"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="10dp"
-                    tools:ignore="RtlCompat" />
+                    android:layout_weight="1"
+                    app:boxStrokeWidth="4dp"
+                    android:layout_marginStart="3dp"
+                    app:boxCornerRadiusTopStart="30dp"
+                    app:boxCornerRadiusTopEnd="30dp"
+                    android:textColorHint="@color/colorPrimary"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    android:outlineSpotShadowColor="@color/colorPrimary"
+                    android:outlineAmbientShadowColor="@color/colorPrimary">
 
-            </RelativeLayout>
-
-
-
-
-
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/settings_profile_image"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:src="@drawable/profile"
-        android:layout_below="@+id/app_bar_settings"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"/>
-
-    <TextView
-        android:id="@+id/profile_image_change_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change Profile"
-        android:textColor="@color/black_overlay"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/settings_profile_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="10dp"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/settings_last_name_ed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:outlineSpotShadowColor="@color/colorPrimary"
+                        android:hint="LastName"
+                        android:textStyle="bold" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-    <EditText
-        android:id="@+id/settings_phone_number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_image_change_btn"
-        android:hint="Phone Number"
-        android:layout_margin="15dp"
-        android:padding="10dp"
-        />
-    <EditText
-        android:id="@+id/settings_full_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_phone_number"
-        android:hint="Phone Number"
-        android:layout_margin="15dp"
-        android:padding="10dp"
-        />
-    <EditText
-        android:id="@+id/settings_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settings_full_name"
-        android:hint="Address"
-        android:layout_margin="15dp"
-        android:padding="10dp"/>
 
-</RelativeLayout>
+            </LinearLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/settings_fathers_name_in"
+                android:layout_below="@+id/lin1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_height="wrap_content"
+                app:boxStrokeWidth="4dp"
+                android:layout_weight="1"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                android:textColorHint="@color/colorPrimary"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:outlineAmbientShadowColor="@color/colorPrimary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/settings_fathers_name_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:outlineSpotShadowColor="@color/colorPrimary"
+                    android:hint="FatherName"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/settings_passport_in"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_below="@+id/settings_fathers_name_in"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeWidth="4dp"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                android:textColorHint="@color/colorPrimary"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:outlineAmbientShadowColor="@color/colorPrimary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/settings_passport_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimary"
+                    android:outlineSpotShadowColor="@color/colorPrimary"
+                    android:hint="Passport series"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/settings_phone_in"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_below="@+id/settings_passport_in"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeWidth="4dp"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                android:textColorHint="@color/colorPrimary"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:outlineAmbientShadowColor="@color/colorPrimary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/settings_phone_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/colorPrimary"
+                    android:outlineSpotShadowColor="@color/colorPrimary"
+                    android:hint="Phone Number"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/settings_address_in"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_below="@+id/settings_phone_in"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeWidth="4dp"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                android:layout_marginBottom="42dp"
+                android:textColorHint="@color/colorPrimary"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:outlineSpotShadowColor="@color/colorPrimary"
+                android:outlineAmbientShadowColor="@color/colorPrimary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/settings_address_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:outlineSpotShadowColor="@color/colorPrimary"
+                    android:hint="Address"
+                    android:textStyle="bold" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <TextView
+                android:id="@+id/update_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/settings_address_in"
+                android:layout_centerHorizontal="true"
+                android:text="Update"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/corners_130"
+                android:padding="6dp"
+                />
+
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_below="@+id/settings_address_in"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

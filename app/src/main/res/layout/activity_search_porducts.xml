@@ -8,21 +8,15 @@
     tools:context=".SearchProductsActivity">
 
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:elevation="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black_overlay"
-        android:theme="@style/AppTheme.AppBarOverlay">
 
         <com.mancj.materialsearchbar.MaterialSearchBar
             android:id="@+id/searchBar"
             style="@style/MaterialSearchBarLight"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
             android:imeOptions="actionSearch"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="16dp"
             app:mt_navIconEnabled="true"
             app:mt_hintColor="@color/colorPrimary"
             app:mt_textColor="@color/colorPrimary"
@@ -32,14 +26,13 @@
             app:mt_placeholder="Search" />
 
 
-    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/app_bar">
+        android:layout_below="@+id/searchBar">
 
 
     </androidx.recyclerview.widget.RecyclerView>

@@ -89,6 +89,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(calForDate.getTime());
 
 
+//        final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference()
+//                .child("Orders")
+//                .child(Prevalent.currentOnlineUser.getPhone());
+//
+//        HashMap<String, Object> orderMap = new HashMap<>();
+//
+//        orderMap.put("phone", p2);
+//
+//        orderRef.updateChildren(orderMap);
+//
+
+
+
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
         final HashMap<String, Object> cartMap = new HashMap<>();
 

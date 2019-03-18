@@ -6,20 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <RelativeLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/black_overlay"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <com.github.florent37.awesomebar.AwesomeBar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:background="@color/black_overlay"
             android:elevation="8dp" />
 
+        <com.mancj.materialsearchbar.MaterialSearchBar
+            android:id="@+id/searchBar"
+            style="@style/MaterialSearchBarLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionSearch"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="16dp"
+            app:mt_navIconEnabled="true"
+            app:mt_hintColor="@color/colorPrimary"
+            app:mt_textColor="@color/colorPrimary"
+            app:mt_highlightedTextColor="@color/colorPrimary"
+            app:mt_placeholderColor="@color/colorPrimary"
+            app:mt_roundedSearchBarEnabled="true"
+            app:mt_placeholder="Search" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/barTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="My Products"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:gravity="center"/>
+
+    </RelativeLayout>
+
+
+
+
+
+
 
     <include layout="@layout/content_home" />
 

@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,8 +27,8 @@ import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText InputPhoneNumber, InputPassword;
-    private Button LoginButton;
+    private TextInputEditText InputPhoneNumber, InputPassword;
+    private MaterialButton LoginButton, txtBtnRegister;
     private ProgressDialog loadingBar;
     private TextView AdminLink, NotAdminLink;
     private String parentDbName = "Users";
@@ -40,11 +42,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        LoginButton = (Button) findViewById(R.id.login_btn);
-        InputPassword = (EditText) findViewById(R.id.login_password_input);
-        InputPhoneNumber = (EditText) findViewById(R.id.login_phone_number_input);
-        AdminLink = (TextView) findViewById(R.id.admin_panel_link);
-        NotAdminLink = (TextView) findViewById(R.id.not_admin_panel_link);
+        LoginButton = (MaterialButton) findViewById(R.id.login_btn);
+        txtBtnRegister = (MaterialButton) findViewById(R.id.txtBtnRegister);
+        InputPassword =  findViewById(R.id.login_password_input_ed);
+        InputPhoneNumber =  findViewById(R.id.login_phone_number_input_ed);
+//        AdminLink = (TextView) findViewById(R.id.admin_panel_link);
+//        NotAdminLink = (TextView) findViewById(R.id.not_admin_panel_link);
         loadingBar = new ProgressDialog(this);
 
 
@@ -52,6 +55,13 @@ public class LoginActivity extends AppCompatActivity {
         Paper.init(this);
 
 
+        txtBtnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -60,27 +70,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        AdminLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                LoginButton.setText("Login Admin");
-                AdminLink.setVisibility(View.INVISIBLE);
-                NotAdminLink.setVisibility(View.VISIBLE);
-                parentDbName = "Admins";
-            }
-        });
+//        AdminLink.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view)
+//            {
+////                LoginButton.setText("Login Admin");
+////                AdminLink.setVisibility(View.INVISIBLE);
+////                NotAdminLink.setVisibility(View.VISIBLE);
+////                parentDbName = "Admins";
+//            }
+//        });
 
-        NotAdminLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                LoginButton.setText("Login");
-                AdminLink.setVisibility(View.VISIBLE);
-                NotAdminLink.setVisibility(View.INVISIBLE);
-                parentDbName = "Users";
-            }
-        });
+//        NotAdminLink.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view)
+//            {
+//                LoginButton.setText("Login");
+//                AdminLink.setVisibility(View.VISIBLE);
+//                NotAdminLink.setVisibility(View.INVISIBLE);
+//                parentDbName = "Users";
+//            }
+//        });
     }
 
 

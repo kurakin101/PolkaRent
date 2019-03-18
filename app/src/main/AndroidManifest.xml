@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.polka.rentplace">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -22,7 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserPayment"></activity>
+        <activity android:name=".UserPayment" />
         <activity android:name=".OwnerPayment" />
         <activity android:name=".mlvision.CameraFragment$TestActivity" />
         <activity android:name=".SearchProductsActivity" />
@@ -40,7 +41,8 @@
         <activity android:name=".AdminAddNewProductActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ActivitySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

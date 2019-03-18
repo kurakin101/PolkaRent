@@ -20,13 +20,19 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.polka.rentplace.model.AdminOrders;
+import com.polka.rentplace.prevalent.Prevalent;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AdminNewOrdersActivity extends AppCompatActivity {
 
     private RecyclerView ordersList;
     private DatabaseReference ordersRef;
     private FloatingActionButton fab;
+    private String phone;
 
 
     @Override
@@ -42,6 +48,8 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
         ordersList.setLayoutManager(new LinearLayoutManager(this));
 
 
+        phone = Prevalent.currentOnlineUser.getPhone();
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,21 +63,24 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseRecyclerOptions<AdminOrders> options = new
-                FirebaseRecyclerOptions.Builder<AdminOrders>()
-                .setQuery(ordersRef, AdminOrders.class)
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Orders");
+
+        FirebaseRecyclerOptions<AdminOrders> options = new FirebaseRecyclerOptions.Builder<AdminOrders>()
+                .setQuery(reference.orderByChild("phone").equalTo(phone), AdminOrders.class)
                 .build();
+
+
 
         FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder> adapter =
                 new FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull AdminOrdersViewHolder holder, final int position, @NonNull final AdminOrders model) {
 
-                        holder.userName.setText("Name: " + model.getName());
-                        holder.userPhoneNumber.setText("Phone: " + model.getPhone());
-                        holder.userTotalPrice.setText("Total Amount: " + model.getTotalAmount());
-                        holder.userDateTime.setText("Order at: " + model.getDate() + "  " + model.getTime());
-                        holder.userShippingAddress.setText("Shipping Address: " + model.getAddress() + ", " + model.getCity());
+                            holder.userName.setText("Name: " + model.getLastName() + " " + model.getName() + " " + model.getFatherName());
+                            holder.userPhoneNumber.setText("Phone: " + model.getPhoneOrder());
+                            holder.userTotalPrice.setText("Total Amount: " + model.getTotalAmount());
+                            holder.userDateTime.setText("Order at: " + model.getDate() + "  " + model.getTime());
+                            holder.userShippingAddress.setText("Shipping Address: " + model.getAddress());
 
                         holder.ShowOrdersBtn.setOnClickListener(new View.OnClickListener() {
                             @Override

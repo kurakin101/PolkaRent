@@ -3,28 +3,38 @@ package com.polka.rentplace;
 import android.content.Intent;
 import android.content.res.Configuration;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Build;
 import android.os.Bundle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
+import es.dmoral.toasty.Toasty;
 
+import android.view.ContextMenu;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mancj.materialsearchbar.MaterialSearchBar;
+import com.mancj.materialsearchbar.adapter.SuggestionsAdapter;
 import com.polka.rentplace.model.Products;
 import com.polka.rentplace.viewHolder.ProductViewHolder;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 public class SearchProductsActivity extends AppCompatActivity implements MaterialSearchBar.OnSearchActionListener, PopupMenu.OnMenuItemClickListener {
 
@@ -38,6 +48,7 @@ public class SearchProductsActivity extends AppCompatActivity implements Materia
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +78,7 @@ public class SearchProductsActivity extends AppCompatActivity implements Materia
         searchBar.enableSearch();
 
         searchBar.setOnSearchActionListener(this);
+
 //        searchBar.setOnKeyListener(new MaterialSearchBar.OnKeyListener() {
 //            @Override
 //            public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -152,7 +164,7 @@ public class SearchProductsActivity extends AppCompatActivity implements Materia
                         holder.txtProductName.setText(model.getPname());
                         holder.txtProductDescription.setText(model.getDescription());
                         holder.txtProductPrice.setText("Price = " + model.getPrice() + "$");
-                        Picasso.get().load(model.getImage()).into(holder.imageView);
+                        Picasso.get().load(model.getImage()).into( holder.imageView);
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -193,10 +205,18 @@ public class SearchProductsActivity extends AppCompatActivity implements Materia
     public void onButtonClicked(int buttonCode) {
         switch (buttonCode){
             case MaterialSearchBar.BUTTON_BACK:
-                searchBar.disableSearch();
+                Toast.makeText(this, "run", Toast.LENGTH_SHORT).show();
+                break;
+            case MaterialSearchBar.BUTTON_NAVIGATION:
+                Toast.makeText(this, "run", Toast.LENGTH_SHORT).show();
+                break;
+            case MaterialSearchBar.BUTTON_SPEECH:
+                Toast.makeText(this, "run", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
+
+
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {

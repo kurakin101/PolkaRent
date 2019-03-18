@@ -16,12 +16,31 @@
 
 
     <com.google.android.material.navigation.NavigationView
+        style="@style/Widget.MaterialComponents.NavigationView"
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:background="@color/gray"
         app:headerLayout="@layout/nav_header_home"
         app:menu="@menu/activity_home_drawer" />
+
+
+    <!--<com.mancj.materialsearchbar.MaterialSearchBar-->
+        <!--android:id="@+id/searchBar"-->
+        <!--style="@style/MaterialSearchBarLight"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:imeOptions="actionSearch"-->
+        <!--android:layout_marginVertical="8dp"-->
+        <!--android:layout_marginHorizontal="16dp"-->
+        <!--app:mt_navIconEnabled="true"-->
+        <!--app:mt_hintColor="@color/colorPrimary"-->
+        <!--app:mt_textColor="@color/colorPrimary"-->
+        <!--app:mt_highlightedTextColor="@color/colorPrimary"-->
+        <!--app:mt_placeholderColor="@color/colorPrimary"-->
+        <!--app:mt_roundedSearchBarEnabled="true"-->
+        <!--app:mt_placeholder="Search" />-->
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,47 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
     android:background="@color/black_overlay"
     tools:context=".MainActivity">
 
-<ImageView
-    android:layout_width="150dp"
-    android:layout_height="150dp"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="60dp"
-    />
 
-    <Button
-        android:id="@+id/main_login_btn"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:padding="20dp"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:text="Login"
-        android:layout_alignParentLeft="true" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/main_join_now_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/main_login_btn"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="-10dp"
-        android:padding="20dp"
-        android:text="Join now"
-        android:textAllCaps="false"
-        android:textSize="18sp" />
+        <ImageView
+            android:background="@drawable/logo_icon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/main_login_btn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cornerRadius="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:text="Login"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/main_join_now_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cornerRadius="30dp"
+            android:elevation="8dp"
+            android:layout_above="@+id/main_login_btn"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:padding="20dp"
+            android:textColor="@color/black_overlay"
+            android:text="Join now"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="18sp" />
 
 
 
-</RelativeLayout>
+
+    </RelativeLayout>
+
+
+</ScrollView>

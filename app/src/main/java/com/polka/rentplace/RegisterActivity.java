@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,8 +25,8 @@ import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity
 {
-    private Button CreateAccountButton;
-    private EditText InputName, InputPhoneNumber, InputPassword;
+    private MaterialButton CreateAccountButton, txtLoginBtn;
+    private TextInputEditText InputName, InputPhoneNumber, InputPassword;
     private ProgressDialog loadingBar;
 
 
@@ -35,13 +37,21 @@ public class RegisterActivity extends AppCompatActivity
         setContentView(R.layout.activity_register);
 
 
-        CreateAccountButton = (Button) findViewById(R.id.register_btn);
-        InputName = (EditText) findViewById(R.id.register_username_input);
-        InputPassword = (EditText) findViewById(R.id.register_password_input);
-        InputPhoneNumber = (EditText) findViewById(R.id.register_phone_number_input);
+        CreateAccountButton = (MaterialButton) findViewById(R.id.register_btn);
+        txtLoginBtn = (MaterialButton) findViewById(R.id.txtBtnLogin);
+        InputName = (TextInputEditText) findViewById(R.id.register_username_input_ed);
+        InputPassword = (TextInputEditText) findViewById(R.id.register_password_input_ed);
+        InputPhoneNumber = (TextInputEditText) findViewById(R.id.register_phone_number_input_ed);
         loadingBar = new ProgressDialog(this);
 
 
+        txtLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)

@@ -24,7 +24,7 @@ public class AdminUserProductActivity extends AppCompatActivity {
    private DatabaseReference cartListRef;
 
    private String userID = "";
-   String p2;
+   private String phone;
 
 
     @Override
@@ -36,39 +36,37 @@ public class AdminUserProductActivity extends AppCompatActivity {
         userID = getIntent().getStringExtra("uid");
 
 
+        phone = Prevalent.currentOnlineUser.getPhone();
+
         productsList = findViewById(R.id.products_list);
         productsList.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         productsList.setLayoutManager(layoutManager);
 
-        cartListRef = FirebaseDatabase.getInstance().getReference()
-                .child("Cart List")
-                .child("User View").child(userID).child("Products");
+//        cartListRef = FirebaseDatabase.getInstance().getReference()
+//                .child("Cart List")
+//                .child("User View").child(userID).child("Products");
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Cart List").child("User View").child(userID).child("Products");
+
         FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions.Builder<Cart>()
-                .setQuery(cartListRef, Cart.class)
+                .setQuery(reference.orderByChild("phone").equalTo(phone), Cart.class)
                 .build();
+
+
 
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull CartViewHolder holder, int position, @NonNull Cart model) {
-//                p2 = model.getPrice();
 
-//                Picasso.get().load(model.getImage()).into(holder.imgProductImg);
-
-                String d = Prevalent.currentOnlineUser.getPhone();
-                holder.txtProductQuantiny.setText(model.getPhone());
-                if (holder.txtProductQuantiny.getText().equals(d)){
+                    holder.txtProductQuantiny.setText(model.getQuantity());
                     holder.txtProductPrice.setText("Price = " + model.getPrice());
                     holder.txtProductName.setText("Product = " + model.getPname());
-                }else{
-                    productsList.setVisibility(View.INVISIBLE);
-                }
             }
 
             @NonNull

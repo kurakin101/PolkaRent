@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,8 +51,9 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
     private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime;
     private MaterialButton AddNewProductButton;
-    private ImageView InputProductImage;
+    private ImageView InputProductImage,bg;
     private TextInputEditText InputProductName, InputProductCategory, InputProductSubCategory, InputProductPrice;
+    private TextInputLayout inputLayout;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private String productRandomKey, downloadImageUrl;
@@ -76,8 +78,10 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
 
         AddNewProductButton = (MaterialButton) findViewById(R.id.add_new_product);
         InputProductImage = (ImageView) findViewById(R.id.select_product_image);
+        bg = (ImageView) findViewById(R.id.bg);
         InputProductName =  findViewById(R.id.product_name_ed);
         InputProductCategory =  findViewById(R.id.product_category_ed);
+        inputLayout =  findViewById(R.id.product_name_in);
         InputProductSubCategory =  findViewById(R.id.product_subcategory_ed);
         InputProductPrice = findViewById(R.id.product_price_ed);
         loadingBar = new ProgressDialog(this);
@@ -88,6 +92,15 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
         String category = intent.getStringExtra("category");
         InputProductCategory.setText(category);
 
+
+        bg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenGallery();
+                InputProductImage.setVisibility(View.VISIBLE);
+//                bg.setVisibility(View.INVISIBLE);
+            }
+        });
 
         InputProductImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +138,7 @@ public class AdminAddNewProductActivity extends AppCompatActivity {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), ImageUri);
                 InputProductImage.setImageBitmap(bitmap);
+                bg.setVisibility(View.INVISIBLE);
                 processImage();
             } catch (IOException e) {
                 e.printStackTrace();

@@ -60,11 +60,9 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                txtTotalAmount.setText("Total price =  " +  "4");
-                Intent exIntent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
-                exIntent.putExtra("Total Price", String.valueOf(overTotalPrice));
-                finish();
                 Intent intent = new Intent(CartActivity.this, ConfirmFinalOrderActivity.class);
+                intent.putExtra("Total Price", String.valueOf(overTotalPrice));
+                intent.putExtra("phone", "");
                 startActivity(intent);
             }
         });
@@ -85,6 +83,10 @@ public class CartActivity extends AppCompatActivity {
                         .child("Products"), Cart.class)
                         .build();
 
+
+
+
+
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter
                 = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
@@ -95,7 +97,8 @@ public class CartActivity extends AppCompatActivity {
                 holder.txtProductName.setText(model.getPhone());
                 Picasso.get().load(model.getImage()).into(holder.imgProductImg);
 //
-                String p = (String) holder.txtProductName.getText();
+
+
 
 //                int oneTypeProductPrice = ((Integer.valueOf(model.getPrice().replace("₽","")))) * Integer.valueOf(model.getQuantiny());
                 overTotalPrice =  4;
@@ -145,43 +148,10 @@ public class CartActivity extends AppCompatActivity {
                         builder.show();
                   }
               });
+
+
             }
 
-//            private  void  sendToOrder(){
-//                final DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference()
-//                        .child("Orders")
-//                        .child(Prevalent.currentOnlineUser.getPhone());
-//
-//                HashMap<String, Object> orderMap = new HashMap<>();
-//
-//                orderMap.put("phone", p);
-//
-//                orderRef.updateChildren(orderMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()){
-//                            FirebaseDatabase.getInstance().getReference()
-//                                    .child("Cart List")
-//                                    .child("User View")
-//                                    .child(Prevalent.currentOnlineUser.getPhone())
-//                                    .removeValue()
-//                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                        @Override
-//                                        public void onComplete(@NonNull Task<Void> task) {
-//                                            if (task.isSuccessful()){
-//                                                Toast.makeText(ConfirmFinalOrderActivity.this, "your final order has been placed successfully.", Toast.LENGTH_SHORT).show();
-//
-//                                                Intent intent = new Intent(ConfirmFinalOrderActivity.this, HomeActivity.class);
-//                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                                startActivity(intent);
-//                                                finish();
-//                                            }
-//                                        }
-//                                    });
-//                        }
-//                    }
-//                });
-//            }
 
             @NonNull
             @Override

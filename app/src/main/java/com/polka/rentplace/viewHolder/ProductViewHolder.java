@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.polka.rentplace.Interface.ItemClickListerner;
 import com.polka.rentplace.R;
 
