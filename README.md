@@ -13,7 +13,6 @@
 - [x] Authentication by email
 - [x] Add data to real-time database
 - [x] Remove data from real-time database
-- [x] Remove data from real-time database
 - [x] Push notifications
 - [x] QR-transaction
 - [x] Update data
