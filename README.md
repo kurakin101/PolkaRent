@@ -15,6 +15,7 @@
 - [x] Remove data from real-time database
 - [x] Remove data from real-time database
 - [x] Push notifications
+- [x] QR-transaction
 - [x] Update data
 - [x] Face unlock
 - [x] Item recognition
