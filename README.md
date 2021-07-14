@@ -21,4 +21,4 @@
 
 
 ## License
-[Nudle](https://github.com/nuudl) © Vasiliy Kurakin
+[Holly](https://github.com/nuudl) © Vasiliy Kurakin
